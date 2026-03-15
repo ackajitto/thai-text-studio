@@ -9,36 +9,85 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Sarabun:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700&family=Kanit:wght@400;500;700&family=Mitr:wght@400;500;600&family=Chakra+Petch:wght@400;600;700&family=Noto+Sans+Thai:wght@300;400;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;600;700&family=Noto+Serif+Thai:wght@300;400;600;700&family=Trirong:wght@300;400;600;700&family=Fahkwang:wght@300;400;600&family=Krub:wght@300;400;600;700&family=K2D:wght@300;400;600;700&family=Charmonman:wght@400;700&family=Srisakdi:wght@400;700&family=Taviraj:wght@300;400;600;700&family=Chonburi&family=Thasadith:wght@400;700&family=Pridi:wght@300;400;600;700&family=Mali:wght@400;500;600&family=Kodchasan:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+/* ── THEMES ────────────────────────── */
+:root, [data-theme="dark"] {
+  --bg: #0e0e0f; --bg2: #161618; --bg3: #1e1e21; --bg4: #252529;
+  --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.13);
+  --gold: #c9a84c; --gold2: #e8c97a; --cream: #f0ead6;
+  --text: #e8e4dc; --text2: #9e9a93; --text3: #5c5954;
+  --red: #e05252; --green: #4caf88; --blue: #4a9edd;
+}
+[data-theme="light"] {
+  --bg: #f5f3ef; --bg2: #ffffff; --bg3: #f0ede8; --bg4: #e8e4dc;
+  --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+  --gold: #a07828; --gold2: #c49a3c; --cream: #2c2416;
+  --text: #1e1c18; --text2: #5a5650; --text3: #9e9a93;
+  --red: #c0392b; --green: #1e7a56; --blue: #1a6fa8;
+}
+[data-theme="slate"] {
+  --bg: #0f1318; --bg2: #171d24; --bg3: #1e2530; --bg4: #252e3a;
+  --border: rgba(100,160,255,0.07); --border2: rgba(100,160,255,0.13);
+  --gold: #5b9cf0; --gold2: #85b8ff; --cream: #e2eeff;
+  --text: #dce8ff; --text2: #8aa4c8; --text3: #4a6080;
+  --red: #e05252; --green: #4caf88; --blue: #5b9cf0;
+}
+[data-theme="forest"] {
+  --bg: #0d1410; --bg2: #141f18; --bg3: #1a2820; --bg4: #213228;
+  --border: rgba(100,200,130,0.07); --border2: rgba(100,200,130,0.14);
+  --gold: #5db87a; --gold2: #7dd89a; --cream: #dff2e6;
+  --text: #d8f0e0; --text2: #7aaa8c; --text3: #3d6b50;
+  --red: #e07070; --green: #5db87a; --blue: #5bb8c0;
+}
+[data-theme="rose"] {
+  --bg: #15100f; --bg2: #1e1614; --bg3: #271d1b; --bg4: #302320;
+  --border: rgba(220,140,120,0.07); --border2: rgba(220,140,120,0.14);
+  --gold: #d4856a; --gold2: #e8a88e; --cream: #f5e4de;
+  --text: #f0ddd8; --text2: #a87c72; --text3: #6b4840;
+  --red: #e05252; --green: #5ab88a; --blue: #6a9ad4;
+}
+[data-theme="sand"] {
+  --bg: #faf6ef; --bg2: #ffffff; --bg3: #f4ede0; --bg4: #ecdfd0;
+  --border: rgba(160,120,60,0.1); --border2: rgba(160,120,60,0.18);
+  --gold: #9a6c28; --gold2: #c49040; --cream: #2a1e0e;
+  --text: #2a1e0e; --text2: #7a6045; --text3: #b0956e;
+  --red: #b03030; --green: #4a7a50; --blue: #3060a0;
+}
+[data-theme="midnight"] {
+  --bg: #08080d; --bg2: #0e0e18; --bg3: #141420; --bg4: #1a1a2a;
+  --border: rgba(160,120,255,0.08); --border2: rgba(160,120,255,0.16);
+  --gold: #9b72ff; --gold2: #b99aff; --cream: #ede8ff;
+  --text: #e8e2ff; --text2: #8878c0; --text3: #4a4470;
+  --red: #e05880; --green: #58c0a0; --blue: #7090e8;
+}
+
+/* ── THEME SWITCHER ─────────────────── */
+.theme-bar {
+  display: flex; gap: 5px; align-items: center;
+}
+.theme-dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  cursor: pointer; border: 2px solid transparent;
+  transition: transform .15s, border-color .15s;
+  flex-shrink: 0;
+}
+.theme-dot:hover { transform: scale(1.2); }
+.theme-dot.active { border-color: var(--text); transform: scale(1.15); }
+.theme-label {
+  font-size: 11px; color: var(--text3);
+  font-family: 'Sarabun', sans-serif;
+  white-space: nowrap;
+}
+/* shared layout tokens */
 :root {
-  --bg: #0e0e0f;
-  --bg2: #161618;
-  --bg3: #1e1e21;
-  --bg4: #252529;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.13);
-  --gold: #c9a84c;
-  --gold2: #e8c97a;
-  --cream: #f0ead6;
-  --text: #e8e4dc;
-  --text2: #9e9a93;
-  --text3: #5c5954;
-  --red: #e05252;
-  --green: #4caf88;
-  --blue: #4a9edd;
-  --radius: 10px;
-  --radius-lg: 16px;
-  --transition: 0.18s ease;
+  --radius: 10px; --radius-lg: 16px; --transition: 0.18s ease;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Sarabun', sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
-  min-height: 100vh;
-  overflow-x: hidden;
+  background: var(--bg); color: var(--text);
+  font-family: 'Sarabun', sans-serif; font-size: 15px;
+  line-height: 1.6; min-height: 100vh; overflow-x: hidden;
+  transition: background .3s, color .3s;
 }
 
 /* ── SCROLLBAR ─────────────────────── */
@@ -414,7 +463,31 @@ footer a:hover { text-decoration: underline; }
   .font-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ── SHARE MODAL ────────────────────── */
+/* ── PREVIEW MODAL ──────────────────── */
+.preview-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 1rem;
+}
+.preview-backdrop.open { display: flex; }
+.preview-modal {
+  background: var(--bg2); border: 1px solid var(--border2);
+  border-radius: 20px; padding: 1.25rem;
+  width: min(800px, 96vw); max-height: 92vh;
+  display: flex; flex-direction: column; gap: 12px;
+  animation: fadeUp .2s ease both;
+}
+.preview-modal-top { display: flex; align-items: center; justify-content: space-between; }
+.preview-modal-title { font-size: 14px; font-weight: 600; color: var(--cream); }
+.preview-img-wrap {
+  flex: 1; overflow: auto; border-radius: 12px;
+  background: repeating-conic-gradient(#222 0% 25%, #1a1a1a 0% 50%) 0 0 / 20px 20px;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 200px;
+}
+.preview-img-wrap img { max-width: 100%; max-height: 60vh; border-radius: 8px; display: block; }
+.preview-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.preview-info { font-size: 11px; color: var(--text3); align-self: center; margin-left: auto; }
 .share-backdrop {
   display: none; position: fixed; inset: 0; z-index: 200;
   background: rgba(0,0,0,.6); backdrop-filter: blur(6px);
@@ -479,12 +552,21 @@ footer a:hover { text-decoration: underline; }
 <header>
   <a class="logo" href="#">Thai<span>Text</span> <span class="logo-sub">Studio</span></a>
   <div class="header-actions">
+    <div class="theme-bar" title="เปลี่ยนธีมสี">
+      <span class="theme-label">ธีม</span>
+      <div class="theme-dot active" data-theme="dark"     style="background:#1e1e21;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)" title="Dark" onclick="setTheme('dark',this)"></div>
+      <div class="theme-dot"        data-theme="light"    style="background:#f0ede8;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)"      title="Light" onclick="setTheme('light',this)"></div>
+      <div class="theme-dot"        data-theme="slate"    style="background:#1e2530;box-shadow:inset 0 0 0 1px rgba(100,160,255,.3)" title="Slate" onclick="setTheme('slate',this)"></div>
+      <div class="theme-dot"        data-theme="forest"   style="background:#1a2820;box-shadow:inset 0 0 0 1px rgba(100,200,130,.3)" title="Forest" onclick="setTheme('forest',this)"></div>
+      <div class="theme-dot"        data-theme="rose"     style="background:#271d1b;box-shadow:inset 0 0 0 1px rgba(220,140,120,.3)" title="Rose" onclick="setTheme('rose',this)"></div>
+      <div class="theme-dot"        data-theme="sand"     style="background:#f4ede0;box-shadow:inset 0 0 0 1px rgba(160,120,60,.2)"  title="Sand" onclick="setTheme('sand',this)"></div>
+      <div class="theme-dot"        data-theme="midnight" style="background:#141420;box-shadow:inset 0 0 0 1px rgba(160,120,255,.3)" title="Midnight" onclick="setTheme('midnight',this)"></div>
+    </div>
     <span class="badge-version">v1.0</span>
     <button class="btn btn-sm btn-ghost" onclick="openShare()" style="gap:5px">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       แชร์
     </button>
-    <a class="btn btn-sm btn-ghost" href="https://github.com" target="_blank">GitHub ↗</a>
   </div>
 </header>
 
@@ -524,6 +606,22 @@ footer a:hover { text-decoration: underline; }
       <button class="btn btn-sm btn-gold" onclick="copyShareUrl()" id="copy-url-btn" style="flex-shrink:0">คัดลอกลิงก์</button>
     </div>
     <button class="share-close" onclick="closeShare()">ปิด</button>
+  </div>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div class="preview-backdrop" id="preview-backdrop" onclick="closePreviewIfOutside(event)">
+  <div class="preview-modal">
+    <div class="preview-modal-top">
+      <div class="preview-modal-title">ตัวอย่างภาพที่ส่งออก</div>
+      <button class="btn btn-sm btn-ghost" onclick="closePreview()" style="padding:4px 10px">✕ ปิด</button>
+    </div>
+    <div class="preview-img-wrap"><img id="preview-img" src="" alt="preview"></div>
+    <div class="preview-actions">
+      <button class="btn btn-gold" id="preview-dl-btn" onclick="triggerDownload()">⬇ ดาวน์โหลด</button>
+      <button class="btn btn-ghost btn-sm" onclick="copyPreviewToClipboard()">คัดลอกภาพ</button>
+      <span class="preview-info" id="preview-info"></span>
+    </div>
   </div>
 </div>
 
@@ -678,12 +776,8 @@ footer a:hover { text-decoration: underline; }
           <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
             <a id="gemini-link" href="https://gemini.google.com/app" target="_blank" rel="noopener"
                style="display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:10px;background:linear-gradient(135deg,#4285f4,#0f9d58,#fbbc04,#ea4335);color:#fff;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:0.02em;box-shadow:0 2px 12px rgba(66,133,244,0.35);transition:opacity .15s,transform .15s" onmouseover="this.style.opacity='.88';this.style.transform='scale(1.02)'" onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="white" opacity="0"/><path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 2c.55 0 1.08.07 1.6.18L8.18 10.6A6.965 6.965 0 0 1 5 12c0-3.86 3.14-7 7-7zm0 14c-3.86 0-7-3.14-7-7 0-1.25.33-2.42.91-3.42L15.42 18.09A6.965 6.965 0 0 1 12 19zm5.09-3.58L8.58 6.91C9.58 6.33 10.75 6 12 6c3.86 0 7 3.14 7 7 0 1.25-.33 2.42-.91 3.42z" fill="white" opacity="0"/><circle cx="12" cy="12" r="9" fill="none" stroke="white" stroke-width="0"/><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" fill="none"/><path d="M21.5 12c0 5.25-4.25 9.5-9.5 9.5S2.5 17.25 2.5 12 6.75 2.5 12 2.5s9.5 4.25 9.5 9.5z" fill="none" stroke="white" stroke-width="1.5" opacity="0"/><text x="12" y="16" text-anchor="middle" font-size="13" font-weight="bold" fill="white" font-family="sans-serif">G</text></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><text x="12" y="16" text-anchor="middle" font-size="13" font-weight="bold" fill="white" font-family="sans-serif">G</text></svg>
               เปิด Gemini แล้ววางได้เลย ↗
-            </a>
-            <a href="https://aistudio.google.com/generate-image" target="_blank" rel="noopener"
-               style="display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#e8e4dc;font-family:'Sarabun',sans-serif;font-size:12px;font-weight:600;text-decoration:none;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
-              AI Studio ↗
             </a>
           </div>
           <p style="font-size:11px;color:#5c5954;margin-top:6px;line-height:1.5">คัดลอก Prompt ด้านบน → เปิด Gemini → วางใน chat แล้วสั่ง Generate Image</p>
@@ -882,7 +976,17 @@ footer a:hover { text-decoration: underline; }
         <div class="divider"></div>
         <div class="btn-group">
           <button class="btn btn-gold" onclick="exportImage()">⬇ ดาวน์โหลดภาพ</button>
+          <button class="btn btn-ghost btn-sm" onclick="previewImage()">🔍 ดูตัวอย่าง</button>
           <button class="btn btn-ghost btn-sm" onclick="copyImageToClipboard()">คัดลอก</button>
+        </div>
+        <div id="export-thumb-wrap" style="display:none;margin-top:10px">
+          <div style="font-size:11px;color:var(--text3);margin-bottom:6px">ตัวอย่างล่าสุด</div>
+          <div style="position:relative;display:inline-block;cursor:pointer" onclick="openPreviewFromThumb()">
+            <img id="export-thumb" src="" alt="preview" style="max-width:100%;max-height:140px;border-radius:8px;display:block;border:1px solid var(--border2)">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .15s" onmouseover="this.style.background='rgba(0,0,0,0.35)';this.querySelector('span').style.opacity='1'" onmouseout="this.style.background='rgba(0,0,0,0)';this.querySelector('span').style.opacity='0'">
+              <span style="opacity:0;color:#fff;font-size:13px;font-weight:600;transition:opacity .15s">ขยายดู</span>
+            </div>
+          </div>
         </div>
         <p class="hint" style="margin-top:8px">ภาพที่ดาวน์โหลดจะมีความละเอียดเท่ากับต้นฉบับที่อัปโหลด</p>
       </div>
@@ -1594,6 +1698,12 @@ async function getExportCanvas() {
   return full;
 }
 
+// cache last export data URL for preview/re-download
+let lastExportDataUrl = '';
+let lastExportExt = 'png';
+let lastExportFmt = 'image/png';
+let lastExportQuality = 0.95;
+
 async function exportImage() {
   if (!bgImage) return;
   const btn = document.querySelector('#export-card .btn-gold');
@@ -1603,14 +1713,88 @@ async function exportImage() {
     const q = parseInt(document.getElementById('export-quality').value) / 100;
     const full = await getExportCanvas();
     const ext = fmt === 'image/png' ? 'png' : fmt === 'image/webp' ? 'webp' : 'jpg';
+    const dataUrl = full.toDataURL(fmt, q);
+    lastExportDataUrl = dataUrl;
+    lastExportExt = ext;
+    lastExportFmt = fmt;
+    lastExportQuality = q;
+    // Show thumbnail in export card
+    const thumb = document.getElementById('export-thumb');
+    thumb.src = dataUrl;
+    document.getElementById('export-thumb-wrap').style.display = 'block';
+    // Trigger actual download
     const a = document.createElement('a');
     a.download = `thaitext-studio.${ext}`;
-    a.href = full.toDataURL(fmt, q);
+    a.href = dataUrl;
     a.click();
-    toast('✓ ดาวน์โหลดเรียบร้อย');
+    toast('✓ ดาวน์โหลดเรียบร้อย — คลิกภาพตัวอย่างด้านล่างเพื่อขยายดู');
   } finally {
     if (btn) { btn.textContent = '⬇ ดาวน์โหลดภาพ'; btn.disabled = false; }
   }
+}
+
+async function previewImage() {
+  if (!bgImage) return;
+  const btn = document.querySelector('#export-card .btn-ghost');
+  if (btn) { btn.textContent = '⏳...'; btn.disabled = true; }
+  try {
+    const fmt = document.getElementById('export-fmt').value;
+    const q = parseInt(document.getElementById('export-quality').value) / 100;
+    const full = await getExportCanvas();
+    const ext = fmt === 'image/png' ? 'png' : fmt === 'image/webp' ? 'webp' : 'jpg';
+    const dataUrl = full.toDataURL(fmt, q);
+    lastExportDataUrl = dataUrl;
+    lastExportExt = ext;
+    lastExportFmt = fmt;
+    lastExportQuality = q;
+    // Show thumbnail
+    document.getElementById('export-thumb').src = dataUrl;
+    document.getElementById('export-thumb-wrap').style.display = 'block';
+    // Open preview modal
+    showPreviewModal(dataUrl, full.width, full.height, ext);
+  } finally {
+    if (btn) { btn.textContent = '🔍 ดูตัวอย่าง'; btn.disabled = false; }
+  }
+}
+
+function showPreviewModal(dataUrl, w, h, ext) {
+  document.getElementById('preview-img').src = dataUrl;
+  document.getElementById('preview-info').textContent = `${w} × ${h}px · ${ext.toUpperCase()}`;
+  document.getElementById('preview-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openPreviewFromThumb() {
+  if (!lastExportDataUrl) return;
+  const img = document.getElementById('export-thumb');
+  showPreviewModal(lastExportDataUrl, bgImage.width, bgImage.height, lastExportExt);
+}
+
+function closePreview() {
+  document.getElementById('preview-backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closePreviewIfOutside(e) {
+  if (e.target === document.getElementById('preview-backdrop')) closePreview();
+}
+
+function triggerDownload() {
+  if (!lastExportDataUrl) { exportImage(); return; }
+  const a = document.createElement('a');
+  a.download = `thaitext-studio.${lastExportExt}`;
+  a.href = lastExportDataUrl;
+  a.click();
+  toast('✓ ดาวน์โหลดเรียบร้อย');
+}
+
+async function copyPreviewToClipboard() {
+  if (!lastExportDataUrl) return;
+  try {
+    const res = await fetch(lastExportDataUrl);
+    const blob = await res.blob();
+    await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+    toast('✓ คัดลอกภาพแล้ว');
+  } catch { toast('ไม่สามารถคัดลอกได้ในเบราว์เซอร์นี้ — ใช้ดาวน์โหลดแทน'); }
 }
 
 async function copyImageToClipboard() {
@@ -1625,6 +1809,30 @@ async function copyImageToClipboard() {
     }, 'image/png');
   } catch(e) { toast('เกิดข้อผิดพลาด: ' + e.message); }
 }
+
+// Close preview on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closePreview(); closeShare(); }
+});
+
+// ─── THEME ─────────────────────────────────────────────────────────
+function setTheme(name, el) {
+  document.documentElement.setAttribute('data-theme', name);
+  document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+  if (el) el.classList.add('active');
+  else {
+    const dot = document.querySelector(`.theme-dot[data-theme="${name}"]`);
+    if (dot) dot.classList.add('active');
+  }
+  try { localStorage.setItem('thaitext-theme', name); } catch(e) {}
+}
+// Restore saved theme on load
+(function() {
+  try {
+    const saved = localStorage.getItem('thaitext-theme');
+    if (saved) setTheme(saved, null);
+  } catch(e) {}
+})();
 
 // ─── HELPERS ───────────────────────────────────────────────────────
 function rgbHex(r, g, b) { return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join(''); }
@@ -1709,7 +1917,7 @@ async function nativeShare() {
     copyShareUrl();
   }
 }
-// Close on Escape key
+// Close on Escape key (share modal only — preview handled above)
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShare(); });
 </script>
 </body>
