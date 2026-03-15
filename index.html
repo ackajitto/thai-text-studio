@@ -585,6 +585,18 @@ footer a:hover { text-decoration: underline; }
         </div>
         <div id="prompt-output" style="display:none">
           <div class="prompt-box" id="prompt-text"></div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <a id="gemini-link" href="https://gemini.google.com/app" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:10px;background:linear-gradient(135deg,#4285f4,#0f9d58,#fbbc04,#ea4335);color:#fff;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:0.02em;box-shadow:0 2px 12px rgba(66,133,244,0.35);transition:opacity .15s,transform .15s" onmouseover="this.style.opacity='.88';this.style.transform='scale(1.02)'" onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="white" opacity="0"/><path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 2c.55 0 1.08.07 1.6.18L8.18 10.6A6.965 6.965 0 0 1 5 12c0-3.86 3.14-7 7-7zm0 14c-3.86 0-7-3.14-7-7 0-1.25.33-2.42.91-3.42L15.42 18.09A6.965 6.965 0 0 1 12 19zm5.09-3.58L8.58 6.91C9.58 6.33 10.75 6 12 6c3.86 0 7 3.14 7 7 0 1.25-.33 2.42-.91 3.42z" fill="white" opacity="0"/><circle cx="12" cy="12" r="9" fill="none" stroke="white" stroke-width="0"/><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" fill="none"/><path d="M21.5 12c0 5.25-4.25 9.5-9.5 9.5S2.5 17.25 2.5 12 6.75 2.5 12 2.5s9.5 4.25 9.5 9.5z" fill="none" stroke="white" stroke-width="1.5" opacity="0"/><text x="12" y="16" text-anchor="middle" font-size="13" font-weight="bold" fill="white" font-family="sans-serif">G</text></svg>
+              เปิด Gemini แล้ววางได้เลย ↗
+            </a>
+            <a href="https://aistudio.google.com/generate-image" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#e8e4dc;font-family:'Sarabun',sans-serif;font-size:12px;font-weight:600;text-decoration:none;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
+              AI Studio ↗
+            </a>
+          </div>
+          <p style="font-size:11px;color:#5c5954;margin-top:6px;line-height:1.5">คัดลอก Prompt ด้านบน → เปิด Gemini → วางใน chat แล้วสั่ง Generate Image</p>
         </div>
       </div>
     </div>
@@ -872,6 +884,30 @@ let resizeIdx = -1, resizeStartX = 0, resizeStartSize = 0;
 let activeTags = new Set();
 let history = [];
 let showGrid = false;
+let fontsLoaded = new Set();
+
+// Preload a font into Canvas so it renders correctly
+async function ensureFont(fontFamily, weight) {
+  const key = fontFamily + weight;
+  if (fontsLoaded.has(key)) return;
+  try {
+    // Strip quotes for FontFace API
+    const name = fontFamily.replace(/'/g, '');
+    await document.fonts.load(`${weight} 40px ${name}`);
+    fontsLoaded.add(key);
+  } catch(e) {}
+}
+
+// Preload all fonts used in current layers (called before export)
+async function preloadAllFonts() {
+  const promises = [];
+  for (const l of textLayers) {
+    for (const w of ['300','400','500','600','700']) {
+      promises.push(ensureFont(l.font, w));
+    }
+  }
+  await Promise.all(promises);
+}
 
 // ─── INIT ─────────────────────────────────────────────────────────
 document.querySelectorAll('.tag[data-v]').forEach(t => {
@@ -924,7 +960,8 @@ function pickFont(f, el) {
   selFont = f;
   document.querySelectorAll('.font-card').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
-  if (selIdx >= 0) { textLayers[selIdx].font = f; renderCanvas(); }
+  ensureFont(f, '400'); ensureFont(f, '600'); ensureFont(f, '700');
+  if (selIdx >= 0) { textLayers[selIdx].font = f; setTimeout(renderCanvas, 150); }
 }
 
 // ─── PROMPT ───────────────────────────────────────────────────────
@@ -964,7 +1001,15 @@ function generatePrompt() {
 
   document.getElementById('prompt-text').textContent = parts;
   document.getElementById('prompt-output').style.display = 'block';
-  toast('✦ สร้าง Prompt เรียบร้อย');
+  // Auto-copy so user can paste into Gemini immediately
+  navigator.clipboard.writeText(parts).then(() => {
+    toast('✦ สร้าง Prompt เรียบร้อย — คัดลอกแล้ว! เปิด Gemini แล้ววางได้เลย');
+    const msg = document.getElementById('copy-msg');
+    msg.style.display = 'inline';
+    setTimeout(() => msg.style.display = 'none', 3000);
+  }).catch(() => {
+    toast('✦ สร้าง Prompt เรียบร้อย — กด "คัดลอก" แล้วไปวางใน Gemini');
+  });
 }
 
 function copyPrompt() {
@@ -1207,7 +1252,8 @@ function addOrUpdateText() {
   document.getElementById('add-btn').textContent = '✦ อัปเดตข้อความ';
   document.getElementById('cancel-btn').style.display = 'inline-flex';
   document.getElementById('txt-input').value = '';
-  renderCanvas(); renderLayerList();
+  // Preload this font then render — ensures Canvas shows correct font
+  ensureFont(layer.font, layer.weight).then(() => { renderCanvas(); renderLayerList(); });
   toast('✓ เพิ่มข้อความเรียบร้อย');
 }
 function removeLayer(i) { saveHistory(); textLayers.splice(i, 1); if (selIdx === i) cancelEdit(); else if (selIdx > i) selIdx--; renderCanvas(); renderLayerList(); }
@@ -1267,7 +1313,8 @@ function renderCanvas() {
     ctx.translate(x, y);
     if (l.rotate) ctx.rotate(l.rotate * Math.PI / 180);
     ctx.globalAlpha = l.opacity / 100;
-    ctx.font = `${l.weight} ${size}px ${l.font}, 'Sarabun', sans-serif`;
+    const fontName = l.font.replace(/'/g, '');
+    ctx.font = `${l.weight} ${size}px "${fontName}", Sarabun, sans-serif`;
     ctx.textAlign = l.align; ctx.textBaseline = 'middle';
 
     // Background pill
@@ -1329,6 +1376,8 @@ function renderCanvas() {
 }
 
 function drawSpacedText(ctx, l, size, sh, x, y) {
+  const fontName = l.font.replace(/'/g, '');
+  ctx.font = `${l.weight} ${size}px "${fontName}", Sarabun, sans-serif`;
   const chars = [...l.text];
   const spacing = l.spacing || 0;
   const widths = chars.map(c => ctx.measureText(c).width);
@@ -1391,24 +1440,20 @@ function applyColor(hex) {
 }
 
 // ─── EXPORT ────────────────────────────────────────────────────────
-function getExportCanvas() {
-  const hires = document.getElementById('export-hires').checked;
-  const mc = document.getElementById('main-canvas');
-  const full = document.createElement('canvas');
-  full.width = hires ? bgImage.width : mc.width;
-  full.height = hires ? bgImage.height : mc.height;
-  const ctx = full.getContext('2d');
-  ctx.drawImage(bgImage, 0, 0, full.width, full.height);
-  const scaleF = full.width / 800;
+// size is ALWAYS scaled from 800-base, same as preview — never use raw l.size for hi-res
+function drawLayersOnCanvas(ctx, fullW, fullH) {
   textLayers.forEach(l => {
     if (!l.visible) return;
-    const size = hires ? l.size : Math.round(l.size * (mc.width / 800));
+    // KEY FIX: always scale from 800-base so hi-res matches preview exactly
+    const size = Math.round(l.size * (fullW / 800));
     ctx.save();
-    const x = full.width * l.x / 100, y = full.height * l.y / 100;
+    const x = fullW * l.x / 100, y = fullH * l.y / 100;
     ctx.translate(x, y);
     if (l.rotate) ctx.rotate(l.rotate * Math.PI / 180);
     ctx.globalAlpha = l.opacity / 100;
-    ctx.font = `${l.weight} ${size}px ${l.font}, 'Sarabun', sans-serif`;
+    // KEY FIX: use document.fonts-loaded font name without extra fallback confusion
+    const fontName = l.font.replace(/'/g, '');
+    ctx.font = `${l.weight} ${size}px "${fontName}", Sarabun, sans-serif`;
     ctx.textAlign = l.align; ctx.textBaseline = 'middle';
     if (l.bgOn) {
       const m = ctx.measureText(l.text);
@@ -1424,33 +1469,60 @@ function getExportCanvas() {
     const s = sh[l.shadow];
     if (s) { ctx.shadowColor = s.c; ctx.shadowBlur = s.b; ctx.shadowOffsetX = s.o; ctx.shadowOffsetY = s.o; }
     const sw = parseInt(l.strokeW);
-    if (sw > 0) { ctx.strokeStyle = l.stroke; ctx.lineWidth = sw * 3; ctx.lineJoin = 'round'; ctx.strokeText(l.text, 0, 0); }
+    if (sw > 0) { ctx.strokeStyle = l.stroke; ctx.lineWidth = sw * (fullW / 800) * 2; ctx.lineJoin = 'round'; ctx.strokeText(l.text, 0, 0); }
     ctx.fillStyle = l.color; ctx.fillText(l.text, 0, 0);
     ctx.restore();
   });
+}
+
+async function getExportCanvas() {
+  // Preload all fonts used — wait until Canvas can actually render them
+  toast('⏳ กำลังโหลดฟอนต์...');
+  await preloadAllFonts();
+  // Extra settle time for fonts to fully apply in Canvas context
+  await new Promise(r => setTimeout(r, 200));
+
+  const hires = document.getElementById('export-hires').checked;
+  const mc = document.getElementById('main-canvas');
+  const full = document.createElement('canvas');
+  full.width  = hires ? bgImage.width  : mc.width;
+  full.height = hires ? bgImage.height : mc.height;
+  const ctx = full.getContext('2d');
+  ctx.drawImage(bgImage, 0, 0, full.width, full.height);
+  drawLayersOnCanvas(ctx, full.width, full.height);
   return full;
 }
-function exportImage() {
+
+async function exportImage() {
   if (!bgImage) return;
-  const fmt = document.getElementById('export-fmt').value;
-  const q = parseInt(document.getElementById('export-quality').value) / 100;
-  const full = getExportCanvas();
-  const ext = fmt === 'image/png' ? 'png' : fmt === 'image/webp' ? 'webp' : 'jpg';
-  const a = document.createElement('a');
-  a.download = `thaitext-studio.${ext}`;
-  a.href = full.toDataURL(fmt, q);
-  a.click();
-  toast('⬇ กำลังดาวน์โหลด...');
+  const btn = document.querySelector('#export-card .btn-gold');
+  if (btn) { btn.textContent = '⏳ กำลังเตรียม...'; btn.disabled = true; }
+  try {
+    const fmt = document.getElementById('export-fmt').value;
+    const q = parseInt(document.getElementById('export-quality').value) / 100;
+    const full = await getExportCanvas();
+    const ext = fmt === 'image/png' ? 'png' : fmt === 'image/webp' ? 'webp' : 'jpg';
+    const a = document.createElement('a');
+    a.download = `thaitext-studio.${ext}`;
+    a.href = full.toDataURL(fmt, q);
+    a.click();
+    toast('✓ ดาวน์โหลดเรียบร้อย');
+  } finally {
+    if (btn) { btn.textContent = '⬇ ดาวน์โหลดภาพ'; btn.disabled = false; }
+  }
 }
+
 async function copyImageToClipboard() {
   if (!bgImage) return;
-  const full = getExportCanvas();
-  full.toBlob(async blob => {
-    try {
-      await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
-      toast('✓ คัดลอกภาพไปยัง Clipboard แล้ว');
-    } catch { toast('ไม่สามารถคัดลอกได้ — ลองดาวน์โหลดแทน'); }
-  }, 'image/png');
+  try {
+    const full = await getExportCanvas();
+    full.toBlob(async blob => {
+      try {
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        toast('✓ คัดลอกภาพไปยัง Clipboard แล้ว');
+      } catch { toast('ไม่สามารถคัดลอกได้ — ลองดาวน์โหลดแทน'); }
+    }, 'image/png');
+  } catch(e) { toast('เกิดข้อผิดพลาด: ' + e.message); }
 }
 
 // ─── HELPERS ───────────────────────────────────────────────────────
