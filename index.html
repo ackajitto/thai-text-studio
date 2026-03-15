@@ -414,7 +414,54 @@ footer a:hover { text-decoration: underline; }
   .font-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ── ANIMATIONS ────────────────────── */
+/* ── SHARE MODAL ────────────────────── */
+.share-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+}
+.share-backdrop.open { display: flex; }
+.share-modal {
+  background: var(--bg2); border: 1px solid var(--border2);
+  border-radius: 20px; padding: 1.5rem; width: min(420px, 92vw);
+  animation: fadeUp .2s ease both;
+}
+.share-modal-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 20px;
+  font-weight: 600; color: var(--cream); margin-bottom: 4px;
+}
+.share-modal-sub { font-size: 12px; color: var(--text3); margin-bottom: 1.25rem; }
+.share-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1rem; }
+.share-btn-card {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 14px 8px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--bg3);
+  cursor: pointer; transition: all .15s; text-decoration: none;
+  font-family: 'Sarabun', sans-serif;
+}
+.share-btn-card:hover { background: var(--bg4); border-color: var(--border2); transform: translateY(-2px); }
+.share-btn-card .share-icon { font-size: 26px; line-height: 1; }
+.share-btn-card .share-label { font-size: 12px; font-weight: 600; color: var(--text2); }
+.share-url-row {
+  display: flex; gap: 6px; align-items: center;
+  background: var(--bg); border: 1px solid var(--border2);
+  border-radius: 10px; padding: 8px 10px; margin-bottom: 1rem;
+}
+.share-url-text {
+  flex: 1; font-size: 12px; color: var(--text3);
+  font-family: 'IBM Plex Mono', monospace;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  background: none; border: none; outline: none;
+  color: var(--text2); cursor: text;
+}
+.share-close {
+  width: 100%; padding: 9px; border-radius: 10px;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text2); font-family: 'Sarabun', sans-serif;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: background .15s;
+}
+.share-close:hover { background: var(--bg4); }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
@@ -433,9 +480,52 @@ footer a:hover { text-decoration: underline; }
   <a class="logo" href="#">Thai<span>Text</span> <span class="logo-sub">Studio</span></a>
   <div class="header-actions">
     <span class="badge-version">v1.0</span>
+    <button class="btn btn-sm btn-ghost" onclick="openShare()" style="gap:5px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      แชร์
+    </button>
     <a class="btn btn-sm btn-ghost" href="https://github.com" target="_blank">GitHub ↗</a>
   </div>
 </header>
+
+<!-- SHARE MODAL -->
+<div class="share-backdrop" id="share-backdrop" onclick="closeShareIfOutside(event)">
+  <div class="share-modal">
+    <div class="share-modal-title">แชร์เว็บนี้</div>
+    <div class="share-modal-sub">ส่งต่อให้เพื่อนที่อยากเพิ่มข้อความไทยบนภาพ Gemini</div>
+    <div class="share-grid">
+      <a class="share-btn-card" id="share-line" href="#" target="_blank" rel="noopener" onclick="shareToLine()">
+        <span class="share-icon">🟢</span>
+        <span class="share-label">LINE</span>
+      </a>
+      <a class="share-btn-card" id="share-fb" href="#" target="_blank" rel="noopener" onclick="shareToFacebook()">
+        <span class="share-icon">📘</span>
+        <span class="share-label">Facebook</span>
+      </a>
+      <a class="share-btn-card" id="share-tw" href="#" target="_blank" rel="noopener" onclick="shareToX()">
+        <span class="share-icon">𝕏</span>
+        <span class="share-label">X / Twitter</span>
+      </a>
+      <a class="share-btn-card" href="#" onclick="shareToWhatsApp()">
+        <span class="share-icon">💬</span>
+        <span class="share-label">WhatsApp</span>
+      </a>
+      <a class="share-btn-card" href="#" onclick="shareToEmail()">
+        <span class="share-icon">📧</span>
+        <span class="share-label">Email</span>
+      </a>
+      <div class="share-btn-card" onclick="nativeShare()">
+        <span class="share-icon">⬆️</span>
+        <span class="share-label">อื่นๆ</span>
+      </div>
+    </div>
+    <div class="share-url-row">
+      <input class="share-url-text" id="share-url-input" readonly value="">
+      <button class="btn btn-sm btn-gold" onclick="copyShareUrl()" id="copy-url-btn" style="flex-shrink:0">คัดลอกลิงก์</button>
+    </div>
+    <button class="share-close" onclick="closeShare()">ปิด</button>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -945,7 +1035,7 @@ function buildFontGrid(cat) {
   const g = document.getElementById('font-grid');
   const filtered = cat === 'all' ? FONTS : FONTS.filter(f => f.cat === cat);
   g.innerHTML = filtered.map((fo, i) => `
-    <div class="font-card${fo.f === selFont ? ' active' : ''}" onclick="pickFont('${fo.f}',this)" data-font="${fo.f}">
+    <div class="font-card${fo.f === selFont ? ' active' : ''}" data-font="${fo.f.replace(/'/g,'')}" onclick="pickFontByName(this)">
       <div class="font-cat">${fo.cat}</div>
       <div class="font-name-label">${fo.n}</div>
       <div class="font-sample" style="font-family:${fo.f}">${fo.s}</div>
@@ -956,10 +1046,20 @@ function filterFont(cat, el) {
   el.classList.add('active');
   buildFontGrid(cat);
 }
-function pickFont(f, el) {
+// Use data-font attribute to avoid quote-in-onclick bug
+function pickFontByName(el) {
+  const name = el.dataset.font;
+  const f = "'" + name + "'";
   selFont = f;
   document.querySelectorAll('.font-card').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
+  ensureFont(f, '400'); ensureFont(f, '600'); ensureFont(f, '700');
+  if (selIdx >= 0) { textLayers[selIdx].font = f; setTimeout(renderCanvas, 150); }
+}
+function pickFont(f, el) {
+  selFont = f;
+  document.querySelectorAll('.font-card').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
   ensureFont(f, '400'); ensureFont(f, '600'); ensureFont(f, '700');
   if (selIdx >= 0) { textLayers[selIdx].font = f; setTimeout(renderCanvas, 150); }
 }
@@ -1177,7 +1277,8 @@ function selectLayer(i) {
   const l = textLayers[i];
   document.getElementById('txt-input').value = l.text;
   selFont = l.font;
-  document.querySelectorAll('.font-card').forEach(c => c.classList.toggle('active', c.dataset.font === l.font));
+  const fontNameClean = l.font.replace(/'/g, '');
+  document.querySelectorAll('.font-card').forEach(c => c.classList.toggle('active', c.dataset.font === fontNameClean));
   document.getElementById('txt-size').value = l.size;
   document.getElementById('txt-weight').value = l.weight;
   document.getElementById('txt-color').value = l.color;
@@ -1536,6 +1637,80 @@ function toast(msg) {
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2800);
 }
+
+// ─── SHARE ─────────────────────────────────────────────────────────
+function getPageUrl() {
+  return window.location.href.split('?')[0];
+}
+function getShareText() {
+  return 'ThaiText Studio — เครื่องมือเพิ่มข้อความภาษาไทยบนภาพ Gemini ฟรี! ตัวอักษรถูกต้อง ไม่เพี้ยน ✨';
+}
+function openShare() {
+  const url = getPageUrl();
+  document.getElementById('share-url-input').value = url;
+  document.getElementById('share-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeShare() {
+  document.getElementById('share-backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('copy-url-btn').textContent = 'คัดลอกลิงก์';
+}
+function closeShareIfOutside(e) {
+  if (e.target === document.getElementById('share-backdrop')) closeShare();
+}
+function copyShareUrl() {
+  const url = getPageUrl();
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('copy-url-btn');
+    btn.textContent = '✓ คัดลอกแล้ว!';
+    setTimeout(() => btn.textContent = 'คัดลอกลิงก์', 2500);
+    toast('✓ คัดลอกลิงก์เรียบร้อย');
+  }).catch(() => {
+    document.getElementById('share-url-input').select();
+    document.execCommand('copy');
+    toast('✓ คัดลอกลิงก์เรียบร้อย');
+  });
+}
+function shareToLine() {
+  const url = encodeURIComponent(getPageUrl());
+  const text = encodeURIComponent(getShareText());
+  window.open(`https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`, '_blank', 'width=600,height=600');
+  closeShare();
+}
+function shareToFacebook() {
+  const url = encodeURIComponent(getPageUrl());
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=500');
+  closeShare();
+}
+function shareToX() {
+  const url = encodeURIComponent(getPageUrl());
+  const text = encodeURIComponent(getShareText());
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=450');
+  closeShare();
+}
+function shareToWhatsApp() {
+  const url = encodeURIComponent(getPageUrl());
+  const text = encodeURIComponent(getShareText() + ' ' + getPageUrl());
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+  closeShare();
+}
+function shareToEmail() {
+  const subject = encodeURIComponent('ThaiText Studio — เพิ่มข้อความไทยบนภาพ Gemini');
+  const body = encodeURIComponent(getShareText() + '\n\n' + getPageUrl());
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  closeShare();
+}
+async function nativeShare() {
+  const data = { title: 'ThaiText Studio', text: getShareText(), url: getPageUrl() };
+  if (navigator.share && navigator.canShare && navigator.canShare(data)) {
+    try { await navigator.share(data); closeShare(); } catch(e) {}
+  } else {
+    copyShareUrl();
+  }
+}
+// Close on Escape key
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShare(); });
 </script>
 </body>
 </html>
