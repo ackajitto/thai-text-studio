@@ -726,6 +726,21 @@ footer a:hover { text-decoration: underline; }
               <option value="none">ไม่ต้องเว้น</option>
             </select>
           </div>
+          <div class="form-row">
+          <div class="form-col">
+            <label>คำอธิบายภาพหลัก</label>
+            <input type="text" id="img-desc" placeholder="เช่น ท้องฟ้าเหนือทุ่งนาไทยยามเย็น">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-col">
+            <label>คำอธิบายประกอบภาพอย่างผู้เชี่ยวชาญชั้นสูง (Expert Details)</label>
+            <textarea id="img-expert-desc" placeholder="อธิบายเชิงลึก เช่น อารมณ์ภาพ, การจัดวางวัตถุ, ความรู้สึกที่ต้องการสื่อ, หรือเทคนิคเฉพาะเจาะจง..."></textarea>
+            <p class="hint">เว้นว่างได้ หรือใส่เพื่อเพิ่มความแม่นยำขั้นสุดให้ AI</p>
+          </div>
+        </div>
+          
           <div class="form-col">
             <label>มุมกล้อง / องค์ประกอบ</label>
             <select id="img-comp">
@@ -1212,6 +1227,8 @@ function pickFont(f, el) {
 // ─── PROMPT ───────────────────────────────────────────────────────
 function generatePrompt() {
   const desc = document.getElementById('img-desc').value.trim() || 'ภาพทั่วไปที่สวยงาม';
+  // ดึงค่าจากช่องผู้เชี่ยวชาญที่เพิ่งสร้างค่ะ
+  const expertDesc = document.getElementById('img-expert-desc').value.trim(); 
   const style = document.getElementById('img-style').value;
   const ratio = document.getElementById('img-ratio').value;
   const light = document.getElementById('img-light').value;
@@ -1231,6 +1248,8 @@ function generatePrompt() {
 
   const parts = [
     `Subject: ${desc}`,
+    // แทรกรายละเอียดผู้เชี่ยวชาญลงไปใน Prompt ถ้ามีการพิมพ์เข้ามาค่ะ
+    expertDesc ? `Expert Details & Context: ${expertDesc}` : '',
     ``,
     `Style: ${style}`,
     ratio ? `Aspect ratio: ${ratio}` : '',
