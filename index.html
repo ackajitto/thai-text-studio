@@ -176,6 +176,7 @@ header {
   overflow-y: auto;
   position: sticky; top: 60px;
   height: calc(100vh - 60px);
+  padding: 1.5rem; /* 👈 เพิ่มบรรทัดนี้เพื่อให้มีช่องว่างขอบซ้าย/ขวา */
 }
 .content-area { padding: 1.5rem 2rem; overflow-y: auto; }
 
@@ -452,7 +453,7 @@ footer a:hover { text-decoration: underline; }
 /* ── RESPONSIVE ────────────────────── */
 @media (max-width: 900px) {
   .main-grid { grid-template-columns: 1fr; }
-  .sidebar { position: static; height: auto; }
+  .sidebar { position: static; height: auto; padding: 1rem; } /* 👈 เพิ่ม padding: 1rem; ตรงนี้ */
   .content-area { padding: 1rem; }
   header { padding: 0 1rem; }
   .hero { padding: 2rem 1rem 1.5rem; }
