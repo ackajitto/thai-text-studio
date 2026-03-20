@@ -61,51 +61,147 @@
 }
 
 /* ── THEME SWITCHER ─────────────────── */
-.theme-bar { display: flex; gap: 5px; align-items: center; }
-.theme-dot { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: transform .15s, border-color .15s; flex-shrink: 0; }
+.theme-bar {
+  display: flex; gap: 5px; align-items: center;
+}
+.theme-dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  cursor: pointer; border: 2px solid transparent;
+  transition: transform .15s, border-color .15s;
+  flex-shrink: 0;
+}
 .theme-dot:hover { transform: scale(1.2); }
 .theme-dot.active { border-color: var(--text); transform: scale(1.15); }
-.theme-label { font-size: 11px; color: var(--text3); font-family: 'Sarabun', sans-serif; white-space: nowrap; }
-
+.theme-label {
+  font-size: 11px; color: var(--text3);
+  font-family: 'Sarabun', sans-serif;
+  white-space: nowrap;
+}
 /* shared layout tokens */
-:root { --radius: 10px; --radius-lg: 16px; --transition: 0.18s ease; }
+:root {
+  --radius: 10px; --radius-lg: 16px; --transition: 0.18s ease;
+}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--text); font-family: 'Sarabun', sans-serif; font-size: 15px; line-height: 1.6; min-height: 100vh; overflow-x: hidden; transition: background .3s, color .3s; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Sarabun', sans-serif; font-size: 15px;
+  line-height: 1.6; min-height: 100vh; overflow-x: hidden;
+  transition: background .3s, color .3s;
+}
 
+/* ── SCROLLBAR ─────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg2); }
 ::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text3); }
 
-header { position: sticky; top: 0; z-index: 100; background: rgba(14,14,15,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-.logo { display: flex; align-items: baseline; gap: 10px; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; letter-spacing: 0.02em; color: var(--cream); text-decoration: none; }
+/* ── HEADER ────────────────────────── */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(14,14,15,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.logo {
+  display: flex; align-items: baseline; gap: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--cream);
+  text-decoration: none;
+}
 .logo span { color: var(--gold); font-style: italic; }
 .logo-sub { font-family: 'Sarabun', sans-serif; font-size: 11px; font-weight: 400; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; }
 .header-actions { display: flex; gap: 8px; align-items: center; }
 .badge-version { font-size: 10px; padding: 3px 8px; border-radius: 20px; background: var(--bg3); border: 1px solid var(--border2); color: var(--text3); letter-spacing: 0.05em; }
 
-.hero { padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%); pointer-events: none; }
-.hero-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+/* ── HERO ──────────────────────────── */
+.hero {
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); font-weight: 500; margin-bottom: 1rem;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
 .hero-eyebrow::before, .hero-eyebrow::after { content: ''; flex: 0 0 30px; height: 1px; background: var(--gold); opacity: 0.4; }
-.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; line-height: 1.15; color: var(--cream); margin-bottom: 0.75rem; }
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600; line-height: 1.15;
+  color: var(--cream); margin-bottom: 0.75rem;
+}
 .hero h1 em { font-style: italic; color: var(--gold2); }
 .hero-desc { color: var(--text2); font-size: 15px; max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
-.hero-steps { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; max-width: 600px; margin: 0 auto; }
-.hero-step { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text3); padding: 0 16px; border-right: 1px solid var(--border); }
+.hero-steps {
+  display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
+  max-width: 600px; margin: 0 auto;
+}
+.hero-step {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text3); padding: 0 16px;
+  border-right: 1px solid var(--border);
+}
 .hero-step:last-child { border-right: none; }
-.hero-step-n { width: 22px; height: 22px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+.hero-step-n {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--bg3); border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: var(--gold); flex-shrink: 0;
+}
 
-.main-grid { display: grid; grid-template-columns: 380px 1fr; gap: 0; min-height: calc(100vh - 60px); max-width: 1400px; margin: 0 auto; }
-.sidebar { border-right: 1px solid var(--border); overflow-y: auto; position: sticky; top: 60px; height: calc(100vh - 60px); }
+/* ── LAYOUT ────────────────────────── */
+.main-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 0;
+  min-height: calc(100vh - 60px);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.sidebar {
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  position: sticky; top: 60px;
+  height: calc(100vh - 60px);
+}
 .content-area { padding: 1.5rem 2rem; overflow-y: auto; }
 
-.card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 1px; overflow: hidden; }
-.card-header { padding: 14px 18px; display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; border-bottom: 1px solid transparent; transition: background var(--transition); }
+/* ── SECTION CARDS ─────────────────── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1px;
+  overflow: hidden;
+}
+.card-header {
+  padding: 14px 18px;
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer; user-select: none;
+  border-bottom: 1px solid transparent;
+  transition: background var(--transition);
+}
 .card-header:hover { background: var(--bg3); }
 .card-header.open { border-bottom-color: var(--border); }
-.card-num { width: 24px; height: 24px; border-radius: 50%; background: var(--bg4); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+.card-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--bg4); border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: var(--gold); flex-shrink: 0;
+}
 .card-title { font-size: 13px; font-weight: 600; color: var(--cream); flex: 1; letter-spacing: 0.02em; }
 .card-subtitle { font-size: 11px; color: var(--text3); }
 .card-chevron { color: var(--text3); font-size: 10px; transition: transform var(--transition); }
@@ -113,28 +209,69 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(14,14,15,0.92)
 .card-body { padding: 16px 18px; display: none; }
 .card-body.open { display: block; }
 
+/* ── FORM ELEMENTS ─────────────────── */
 label { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 5px; }
-input[type=text], input[type=number], select, textarea { width: 100%; background: var(--bg); border: 1px solid var(--border2); border-radius: var(--radius); color: var(--text); font-family: 'Sarabun', sans-serif; font-size: 13px; padding: 8px 11px; transition: border-color var(--transition), box-shadow var(--transition); outline: none; }
-input[type=text]:focus, input[type=number]:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+input[type=text], input[type=number], select, textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'Sarabun', sans-serif;
+  font-size: 13px;
+  padding: 8px 11px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+input[type=text]:focus, input[type=number]:focus, select:focus, textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+}
 select { cursor: pointer; }
 select option { background: var(--bg2); }
 textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
-input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: var(--bg4); border-radius: 2px; cursor: pointer; }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg); cursor: pointer; transition: transform var(--transition); }
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px;
+  background: var(--bg4); border-radius: 2px; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--gold); border: 2px solid var(--bg);
+  cursor: pointer; transition: transform var(--transition);
+}
 input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-input[type=color] { width: 36px; height: 30px; padding: 2px; background: var(--bg); border: 1px solid var(--border2); border-radius: 6px; cursor: pointer; }
+input[type=color] {
+  width: 36px; height: 30px; padding: 2px;
+  background: var(--bg); border: 1px solid var(--border2);
+  border-radius: 6px; cursor: pointer;
+}
 .form-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
 .form-row:last-child { margin-bottom: 0; }
 .form-col { display: flex; flex-direction: column; flex: 1; min-width: 100px; }
+.form-col-fixed { flex: 0 0 auto; }
 .slider-row { display: flex; align-items: center; gap: 8px; }
 .slider-val { font-size: 12px; font-weight: 600; color: var(--gold); min-width: 38px; text-align: right; }
 .hint { font-size: 11px; color: var(--text3); margin-top: 6px; line-height: 1.5; }
 .hint b { color: var(--text2); }
 
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 16px; font-family: 'Sarabun', sans-serif; font-size: 13px; font-weight: 600; border-radius: var(--radius); border: 1px solid var(--border2); background: var(--bg3); color: var(--text); cursor: pointer; transition: all var(--transition); text-decoration: none; white-space: nowrap; }
+/* ── BUTTONS ───────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 16px;
+  font-family: 'Sarabun', sans-serif; font-size: 13px; font-weight: 600;
+  border-radius: var(--radius); border: 1px solid var(--border2);
+  background: var(--bg3); color: var(--text);
+  cursor: pointer; transition: all var(--transition);
+  text-decoration: none; white-space: nowrap;
+}
 .btn:hover { background: var(--bg4); border-color: var(--border2); }
 .btn:active { transform: scale(0.97); }
-.btn-gold { background: var(--gold); color: #1a1200; border-color: transparent; font-weight: 700; }
+.btn-gold {
+  background: var(--gold); color: #1a1200;
+  border-color: transparent; font-weight: 700;
+}
 .btn-gold:hover { background: var(--gold2); }
 .btn-ghost { background: transparent; border-color: var(--border2); }
 .btn-ghost:hover { background: var(--bg3); }
@@ -144,37 +281,95 @@ input[type=color] { width: 36px; height: 30px; padding: 2px; background: var(--b
 .btn-icon { width: 30px; height: 30px; padding: 0; border-radius: 7px; font-size: 14px; }
 .btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
 
+/* ── TAGS ──────────────────────────── */
 .tag-grid { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
-.tag { font-size: 11px; padding: 4px 10px; border-radius: 20px; background: var(--bg3); border: 1px solid var(--border); color: var(--text3); cursor: pointer; transition: all var(--transition); }
+.tag {
+  font-size: 11px; padding: 4px 10px; border-radius: 20px;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text3); cursor: pointer;
+  transition: all var(--transition);
+}
 .tag:hover { border-color: var(--border2); color: var(--text2); }
 .tag.on { background: rgba(201,168,76,0.12); border-color: rgba(201,168,76,0.4); color: var(--gold); }
 
-.prompt-box { background: var(--bg); border: 1px solid var(--border2); border-radius: var(--radius); padding: 12px 14px; font-size: 12px; line-height: 1.7; color: var(--text2); white-space: pre-wrap; word-break: break-word; max-height: 200px; overflow-y: auto; margin-top: 10px; font-family: 'IBM Plex Mono', 'Courier New', monospace; }
+/* ── PROMPT OUTPUT ─────────────────── */
+.prompt-box {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 12px; line-height: 1.7;
+  color: var(--text2); white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 200px; overflow-y: auto;
+  margin-top: 10px;
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+}
 .copy-success { font-size: 11px; color: var(--green); display: none; }
 
-.canvas-outer { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; position: relative; min-height: 300px; display: flex; align-items: center; justify-content: center; }
-.canvas-placeholder { text-align: center; padding: 3rem 2rem; }
-.canvas-placeholder .icon { font-size: 48px; margin-bottom: 1rem; opacity: 0.3; }
+/* ── CANVAS AREA ───────────────────── */
+.canvas-outer {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  min-height: 300px;
+  display: flex; align-items: center; justify-content: center;
+}
+.canvas-placeholder {
+  text-align: center; padding: 3rem 2rem;
+}
+.canvas-placeholder .icon {
+  font-size: 48px; margin-bottom: 1rem; opacity: 0.3;
+}
 .canvas-placeholder p { color: var(--text3); font-size: 14px; }
 #canvas-container { display: none; position: relative; line-height: 0; }
 #main-canvas { display: block; max-width: 100%; border-radius: 0; touch-action: none; }
 
-.canvas-toolbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 14px; background: var(--bg3); border-bottom: 1px solid var(--border); border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+/* ── TOOLBAR (above canvas) ────────── */
+.canvas-toolbar {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 10px 14px;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
 .canvas-toolbar-title { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; flex: 1; }
 
+/* ── FONT PICKER ───────────────────── */
 .font-tabs { display: flex; gap: 4px; margin-bottom: 10px; flex-wrap: wrap; }
-.font-tab { font-size: 11px; padding: 4px 10px; border-radius: 6px; background: var(--bg3); border: 1px solid var(--border); color: var(--text3); cursor: pointer; transition: all var(--transition); }
+.font-tab {
+  font-size: 11px; padding: 4px 10px; border-radius: 6px;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text3); cursor: pointer; transition: all var(--transition);
+}
 .font-tab.active { background: rgba(201,168,76,0.12); border-color: rgba(201,168,76,0.4); color: var(--gold); }
-.font-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 5px; max-height: 200px; overflow-y: auto; }
-.font-card { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg3); cursor: pointer; transition: all var(--transition); overflow: hidden; }
+.font-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 5px; max-height: 200px; overflow-y: auto;
+}
+.font-card {
+  padding: 8px 10px; border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg3); cursor: pointer;
+  transition: all var(--transition);
+  overflow: hidden;
+}
 .font-card:hover { border-color: var(--border2); background: var(--bg4); }
 .font-card.active { border-color: var(--gold); background: rgba(201,168,76,0.08); }
 .font-cat { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
 .font-name-label { font-size: 10px; color: var(--text3); margin-bottom: 4px; }
 .font-sample { font-size: 16px; line-height: 1.3; color: var(--cream); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
+/* ── LAYER LIST ────────────────────── */
 .layer-list { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; }
-.layer-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; background: var(--bg3); border: 1px solid var(--border); cursor: pointer; transition: all var(--transition); }
+.layer-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 10px; border-radius: 8px;
+  background: var(--bg3); border: 1px solid var(--border);
+  cursor: pointer; transition: all var(--transition);
+}
 .layer-item:hover { border-color: var(--border2); }
 .layer-item.selected { border-color: var(--gold); background: rgba(201,168,76,0.07); }
 .layer-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.2); }
@@ -183,35 +378,78 @@ input[type=color] { width: 36px; height: 30px; padding: 2px; background: var(--b
 .layer-vis { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer; font-size: 12px; color: var(--text3); transition: background var(--transition); }
 .layer-vis:hover { background: var(--bg4); }
 
+/* ── COLOR SWATCHES ────────────────── */
 .swatch-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-.swatch { width: 30px; height: 30px; border-radius: 7px; cursor: pointer; border: 2px solid transparent; transition: transform 0.12s, border-color 0.12s; flex-shrink: 0; position: relative; }
+.swatch {
+  width: 30px; height: 30px; border-radius: 7px;
+  cursor: pointer; border: 2px solid transparent;
+  transition: transform 0.12s, border-color 0.12s;
+  flex-shrink: 0; position: relative;
+}
 .swatch:hover { transform: scale(1.18); }
 .swatch.active { border-color: #fff; }
 .swatch-label { font-size: 9px; text-align: center; color: var(--text3); margin-top: 2px; max-width: 30px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
+/* ── DIVIDER ───────────────────────── */
 .divider { height: 1px; background: var(--border); margin: 14px 0; }
 .section-label { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
 
+/* ── SIZE CONTROLS ─────────────────── */
 .size-controls { display: flex; align-items: center; gap: 6px; }
-.size-btn { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: var(--text2); background: var(--bg3); border: 1px solid var(--border2); border-radius: 7px; cursor: pointer; flex-shrink: 0; transition: all var(--transition); line-height: 1; user-select: none; }
+.size-btn {
+  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: var(--text2);
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 7px; cursor: pointer; flex-shrink: 0;
+  transition: all var(--transition); line-height: 1; user-select: none;
+}
 .size-btn:hover { background: var(--bg4); color: var(--gold); }
 
-.overlay-option { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text2); cursor: pointer; user-select: none; }
+/* ── BG OVERLAY ────────────────────── */
+.overlay-option {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--text2); cursor: pointer; user-select: none;
+}
 .overlay-option input { cursor: pointer; accent-color: var(--gold); }
 
-.upload-zone { border: 1.5px dashed var(--border2); border-radius: var(--radius); padding: 18px 14px; text-align: center; cursor: pointer; transition: all var(--transition); position: relative; }
+/* ── UPLOAD ZONE ───────────────────── */
+.upload-zone {
+  border: 1.5px dashed var(--border2);
+  border-radius: var(--radius);
+  padding: 18px 14px; text-align: center;
+  cursor: pointer; transition: all var(--transition);
+  position: relative;
+}
 .upload-zone:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
 .upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .upload-zone p { font-size: 13px; color: var(--text3); }
 .upload-zone strong { color: var(--gold); }
 
-#toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--bg3); border: 1px solid var(--border2); color: var(--text); font-size: 13px; font-weight: 500; padding: 10px 20px; border-radius: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), opacity 0.3s; opacity: 0; z-index: 999; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+/* ── TOAST ─────────────────────────── */
+#toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--bg3); border: 1px solid var(--border2);
+  color: var(--text); font-size: 13px; font-weight: 500;
+  padding: 10px 20px; border-radius: 30px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), opacity 0.3s;
+  opacity: 0; z-index: 999; white-space: nowrap;
+  display: flex; align-items: center; gap: 8px;
+}
 #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: center; font-size: 12px; color: var(--text3); background: var(--bg2); }
+/* ── FOOTER ────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  font-size: 12px; color: var(--text3);
+  background: var(--bg2);
+}
 footer a { color: var(--gold); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
+/* ── RESPONSIVE ────────────────────── */
 @media (max-width: 900px) {
   .main-grid { grid-template-columns: 1fr; }
   .sidebar { position: static; height: auto; }
@@ -225,30 +463,82 @@ footer a:hover { text-decoration: underline; }
   .font-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.preview-backdrop { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,.75); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 1rem; }
+/* ── PREVIEW MODAL ──────────────────── */
+.preview-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 1rem;
+}
 .preview-backdrop.open { display: flex; }
-.preview-modal { background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px; padding: 1.25rem; width: min(800px, 96vw); max-height: 92vh; display: flex; flex-direction: column; gap: 12px; animation: fadeUp .2s ease both; }
+.preview-modal {
+  background: var(--bg2); border: 1px solid var(--border2);
+  border-radius: 20px; padding: 1.25rem;
+  width: min(800px, 96vw); max-height: 92vh;
+  display: flex; flex-direction: column; gap: 12px;
+  animation: fadeUp .2s ease both;
+}
 .preview-modal-top { display: flex; align-items: center; justify-content: space-between; }
 .preview-modal-title { font-size: 14px; font-weight: 600; color: var(--cream); }
-.preview-img-wrap { flex: 1; overflow: auto; border-radius: 12px; background: repeating-conic-gradient(#222 0% 25%, #1a1a1a 0% 50%) 0 0 / 20px 20px; display: flex; align-items: center; justify-content: center; min-height: 200px; }
+.preview-img-wrap {
+  flex: 1; overflow: auto; border-radius: 12px;
+  background: repeating-conic-gradient(#222 0% 25%, #1a1a1a 0% 50%) 0 0 / 20px 20px;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 200px;
+}
 .preview-img-wrap img { max-width: 100%; max-height: 60vh; border-radius: 8px; display: block; }
 .preview-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .preview-info { font-size: 11px; color: var(--text3); align-self: center; margin-left: auto; }
-.share-backdrop { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.6); backdrop-filter: blur(6px); align-items: center; justify-content: center; }
+.share-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+}
 .share-backdrop.open { display: flex; }
-.share-modal { background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px; padding: 1.5rem; width: min(420px, 92vw); animation: fadeUp .2s ease both; }
-.share-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--cream); margin-bottom: 4px; }
+.share-modal {
+  background: var(--bg2); border: 1px solid var(--border2);
+  border-radius: 20px; padding: 1.5rem; width: min(420px, 92vw);
+  animation: fadeUp .2s ease both;
+}
+.share-modal-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 20px;
+  font-weight: 600; color: var(--cream); margin-bottom: 4px;
+}
 .share-modal-sub { font-size: 12px; color: var(--text3); margin-bottom: 1.25rem; }
 .share-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1rem; }
-.share-btn-card { display: flex; flex-direction: column; align-items: center; gap: 7px; padding: 14px 8px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg3); cursor: pointer; transition: all .15s; text-decoration: none; font-family: 'Sarabun', sans-serif; }
+.share-btn-card {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 14px 8px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--bg3);
+  cursor: pointer; transition: all .15s; text-decoration: none;
+  font-family: 'Sarabun', sans-serif;
+}
 .share-btn-card:hover { background: var(--bg4); border-color: var(--border2); transform: translateY(-2px); }
 .share-btn-card .share-icon { font-size: 26px; line-height: 1; }
 .share-btn-card .share-label { font-size: 12px; font-weight: 600; color: var(--text2); }
-.share-url-row { display: flex; gap: 6px; align-items: center; background: var(--bg); border: 1px solid var(--border2); border-radius: 10px; padding: 8px 10px; margin-bottom: 1rem; }
-.share-url-text { flex: 1; font-size: 12px; color: var(--text3); font-family: 'IBM Plex Mono', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: none; border: none; outline: none; color: var(--text2); cursor: text; }
-.share-close { width: 100%; padding: 9px; border-radius: 10px; background: var(--bg3); border: 1px solid var(--border); color: var(--text2); font-family: 'Sarabun', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: background .15s; }
+.share-url-row {
+  display: flex; gap: 6px; align-items: center;
+  background: var(--bg); border: 1px solid var(--border2);
+  border-radius: 10px; padding: 8px 10px; margin-bottom: 1rem;
+}
+.share-url-text {
+  flex: 1; font-size: 12px; color: var(--text3);
+  font-family: 'IBM Plex Mono', monospace;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  background: none; border: none; outline: none;
+  color: var(--text2); cursor: text;
+}
+.share-close {
+  width: 100%; padding: 9px; border-radius: 10px;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text2); font-family: 'Sarabun', sans-serif;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: background .15s;
+}
 .share-close:hover { background: var(--bg4); }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .hero > * { animation: fadeUp 0.5s ease both; }
 .hero > *:nth-child(2) { animation-delay: 0.08s; }
 .hero > *:nth-child(3) { animation-delay: 0.16s; }
@@ -258,18 +548,19 @@ footer a:hover { text-decoration: underline; }
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
   <a class="logo" href="#">Thai<span>Text</span> <span class="logo-sub">Studio</span></a>
   <div class="header-actions">
     <div class="theme-bar" title="เปลี่ยนธีมสี">
       <span class="theme-label">ธีม</span>
-      <div class="theme-dot active" data-theme="dark" style="background:#1e1e21;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)" onclick="setTheme('dark',this)"></div>
-      <div class="theme-dot" data-theme="light" style="background:#f0ede8;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)" onclick="setTheme('light',this)"></div>
-      <div class="theme-dot" data-theme="slate" style="background:#1e2530;box-shadow:inset 0 0 0 1px rgba(100,160,255,.3)" onclick="setTheme('slate',this)"></div>
-      <div class="theme-dot" data-theme="forest" style="background:#1a2820;box-shadow:inset 0 0 0 1px rgba(100,200,130,.3)" onclick="setTheme('forest',this)"></div>
-      <div class="theme-dot" data-theme="rose" style="background:#271d1b;box-shadow:inset 0 0 0 1px rgba(220,140,120,.3)" onclick="setTheme('rose',this)"></div>
-      <div class="theme-dot" data-theme="sand" style="background:#f4ede0;box-shadow:inset 0 0 0 1px rgba(160,120,60,.2)" onclick="setTheme('sand',this)"></div>
-      <div class="theme-dot" data-theme="midnight" style="background:#141420;box-shadow:inset 0 0 0 1px rgba(160,120,255,.3)" onclick="setTheme('midnight',this)"></div>
+      <div class="theme-dot active" data-theme="dark"     style="background:#1e1e21;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)" title="Dark" onclick="setTheme('dark',this)"></div>
+      <div class="theme-dot"        data-theme="light"    style="background:#f0ede8;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)"      title="Light" onclick="setTheme('light',this)"></div>
+      <div class="theme-dot"        data-theme="slate"    style="background:#1e2530;box-shadow:inset 0 0 0 1px rgba(100,160,255,.3)" title="Slate" onclick="setTheme('slate',this)"></div>
+      <div class="theme-dot"        data-theme="forest"   style="background:#1a2820;box-shadow:inset 0 0 0 1px rgba(100,200,130,.3)" title="Forest" onclick="setTheme('forest',this)"></div>
+      <div class="theme-dot"        data-theme="rose"     style="background:#271d1b;box-shadow:inset 0 0 0 1px rgba(220,140,120,.3)" title="Rose" onclick="setTheme('rose',this)"></div>
+      <div class="theme-dot"        data-theme="sand"     style="background:#f4ede0;box-shadow:inset 0 0 0 1px rgba(160,120,60,.2)"  title="Sand" onclick="setTheme('sand',this)"></div>
+      <div class="theme-dot"        data-theme="midnight" style="background:#141420;box-shadow:inset 0 0 0 1px rgba(160,120,255,.3)" title="Midnight" onclick="setTheme('midnight',this)"></div>
     </div>
     <span class="badge-version">v1.0</span>
     <button class="btn btn-sm btn-ghost" onclick="openShare()" style="gap:5px">
@@ -279,6 +570,7 @@ footer a:hover { text-decoration: underline; }
   </div>
 </header>
 
+<!-- SHARE MODAL -->
 <div class="share-backdrop" id="share-backdrop" onclick="closeShareIfOutside(event)">
   <div class="share-modal">
     <div class="share-modal-title">แชร์เว็บนี้</div>
@@ -317,6 +609,7 @@ footer a:hover { text-decoration: underline; }
   </div>
 </div>
 
+<!-- PREVIEW MODAL -->
 <div class="preview-backdrop" id="preview-backdrop" onclick="closePreviewIfOutside(event)">
   <div class="preview-modal">
     <div class="preview-modal-top">
@@ -331,6 +624,7 @@ footer a:hover { text-decoration: underline; }
   </div>
 </div>
 
+<!-- HERO -->
 <div class="hero">
   <div class="hero-eyebrow">เครื่องมือสำหรับ Gemini + ข้อความไทย</div>
   <h1>เพิ่มข้อความ<em>ภาษาไทย</em><br>บนภาพอย่างมืออาชีพ</h1>
@@ -344,10 +638,13 @@ footer a:hover { text-decoration: underline; }
   </div>
 </div>
 
+<!-- MAIN GRID -->
 <div class="main-grid">
 
+  <!-- ─── SIDEBAR ─────────────────────────── -->
   <aside class="sidebar">
 
+    <!-- CARD 1: PROMPT BUILDER -->
     <div class="card">
       <div class="card-header open" onclick="toggleCard(this)">
         <div class="card-num">1</div>
@@ -358,15 +655,6 @@ footer a:hover { text-decoration: underline; }
         <div class="card-chevron open">▼</div>
       </div>
       <div class="card-body open">
-        
-        <label>ปุ่มลัดสร้าง Prompt ภาพธรรมะ (คลิกเพื่อเติมข้อความอัตโนมัติ)</label>
-        <div class="tag-grid" style="margin-bottom: 12px;">
-          <span class="tag" onclick="setDharmaPrompt('พระพุทธรูปปางสมาธิ ประดิษฐานใต้ต้นโพธิ์ใหญ่ แสงแดดยามเช้าส่องกระทบ บรรยากาศสงบร่มเย็น')">🙏 พระพุทธรูปใต้ต้นโพธิ์</span>
-          <span class="tag" onclick="setDharmaPrompt('ดอกบัวบานสีชมพูชูช่อเหนือน้ำใส แสงอาทิตย์อ่อนๆ ยามเช้า สะท้อนผิวน้ำ')">🪷 ดอกบัวรับแสงอรุณ</span>
-          <span class="tag" onclick="setDharmaPrompt('พระภิกษุสงฆ์เดินบิณฑบาตเป็นแถวยาว ท่ามกลางสายหมอกยามเช้าในชนบท')">🚶‍♂️ พระบิณฑบาตยามเช้า</span>
-          <span class="tag" onclick="setDharmaPrompt('เจดีย์สีทองอร่ามบนยอดเขา ท่ามกลางทะเลหมอก แสงแรกของวัน บรรยากาศศักดิ์สิทธิ์')">⛰️ พระธาตุกลางทะเลหมอก</span>
-        </div>
-
         <div class="form-row">
           <div class="form-col">
             <label>คำอธิบายภาพหลัก</label>
@@ -379,10 +667,19 @@ footer a:hover { text-decoration: underline; }
             <select id="img-style">
               <option value="photorealistic, shot on Sony A7R IV, sharp details, natural lighting">📷 ภาพถ่ายจริง</option>
               <option value="professional DSLR photography, f/1.8 aperture, soft bokeh background, shallow depth of field">📷 DSLR โบเก้</option>
+              <option value="aerial drone photography, DJI Mavic, bird eye view, sweeping vista">🚁 โดรน</option>
+              <option value="cinematic film still, anamorphic lens, Kodak film grain, movie quality, 2.39:1 aspect">🎬 Cinematic</option>
               <option value="detailed digital art illustration, concept art, vibrant colors, professional quality">🎨 ดิจิตอลอาร์ต</option>
+              <option value="anime style, Studio Ghibli inspired, soft watercolor tones, painterly">✏️ อนิเมะ Ghibli</option>
               <option value="loose watercolor painting, wet edges, paper texture, artistic impressionistic">🖌 น้ำสี</option>
               <option value="oil painting, impasto texture, classical art, gallery quality">🖼 สีน้ำมัน</option>
-              <option value="cinematic film still, anamorphic lens, Kodak film grain, movie quality, 2.39:1 aspect">🎬 Cinematic</option>
+              <option value="flat vector design, geometric shapes, clean lines, minimal color palette">📐 Flat Vector</option>
+              <option value="minimalist photography, large negative space, clean simple composition">⬜ Minimalist</option>
+              <option value="retro vintage poster, Risograph grain texture, muted warm palette, 1970s aesthetic">📻 วินเทจเรโทร</option>
+              <option value="modern graphic poster, bold geometric composition, high contrast, editorial design">🗞 กราฟิกโปสเตอร์</option>
+              <option value="cyberpunk city, neon lights, rain reflections, futuristic, night scene">🌆 Cyberpunk</option>
+              <option value="black and white photography, high contrast, chiaroscuro lighting, dramatic shadows">◼ ขาวดำ Dramatic</option>
+              <option value="infrared photography, surreal glowing foliage, dreamlike, otherworldly">🌿 Infrared</option>
             </select>
           </div>
         </div>
@@ -390,11 +687,14 @@ footer a:hover { text-decoration: underline; }
           <div class="form-col">
             <label>อัตราส่วน</label>
             <select id="img-ratio">
-              <option value="1:1 square format">1:1 จัตุรัส (Social)</option>
-              <option value="9:16 portrait vertical">9:16 แนวตั้ง (Stories/Reels)</option>
               <option value="16:9 landscape widescreen">16:9 แนวนอน (วิดีโอ/เว็บ)</option>
+              <option value="9:16 portrait vertical">9:16 แนวตั้ง (Stories/Reels)</option>
+              <option value="1:1 square format">1:1 จัตุรัส (Social)</option>
               <option value="4:5 portrait">4:5 (Instagram ตั้ง)</option>
               <option value="4:3 landscape">4:3 ทั่วไป</option>
+              <option value="3:2 landscape, print format">3:2 (พิมพ์)</option>
+              <option value="2:3 portrait, poster format">2:3 (โปสเตอร์)</option>
+              <option value="21:9 ultrawide cinematic banner">21:9 Ultrawide Banner</option>
             </select>
           </div>
           <div class="form-col">
@@ -402,9 +702,14 @@ footer a:hover { text-decoration: underline; }
             <select id="img-light">
               <option value="">ไม่ระบุ</option>
               <option value="golden hour, warm amber glow, long low shadows, magic hour">🌇 Golden Hour</option>
-              <option value="morning fog and mist, soft diffused light, hazy atmosphere">🌫 หมอกยามเช้า</option>
+              <option value="blue hour twilight, soft purple and pink sky, serene">🌆 Blue Hour</option>
               <option value="bright midday sun, harsh directional light, vivid saturated">☀️ แสงกลางวัน</option>
+              <option value="overcast sky, soft diffused even light, no harsh shadows, cloudy">☁️ ฟ้าครึ้ม</option>
+              <option value="dramatic storm clouds, dark moody sky, lightning atmosphere">⛈ พายุ มืดครึ้ม</option>
+              <option value="backlit contre-jour, sun behind subject, glowing silhouette, lens flare">🌅 ย้อนแสง ซิลูเอต</option>
+              <option value="morning fog and mist, soft diffused light, hazy atmosphere">🌫 หมอกยามเช้า</option>
               <option value="moonlit night, silver light, stars in sky, serene cool tones">🌙 แสงจันทร์ ดาว</option>
+              <option value="neon artificial lighting, colorful street lights, night city, reflections on wet ground">🌃 นีออนเมือง</option>
             </select>
           </div>
         </div>
@@ -415,6 +720,9 @@ footer a:hover { text-decoration: underline; }
               <option value="top">บน — ด้านบน 30%</option>
               <option value="bottom" selected>ล่าง — ด้านล่าง 30%</option>
               <option value="center">กลางภาพ</option>
+              <option value="left">ซ้าย — 1 ใน 3</option>
+              <option value="right">ขวา — 1 ใน 3</option>
+              <option value="fullbleed">ทั่วภาพ (Gradient Overlay)</option>
               <option value="none">ไม่ต้องเว้น</option>
             </select>
           </div>
@@ -425,22 +733,34 @@ footer a:hover { text-decoration: underline; }
               <option value="close-up portrait shot, shallow depth of field, bokeh">Close-up</option>
               <option value="medium shot, balanced composition">Medium Shot</option>
               <option value="wide establishing shot, sweeping landscape, vast">Wide Shot</option>
+              <option value="macro extreme close-up, fine detail visible">Macro</option>
+              <option value="rule of thirds dynamic composition, asymmetric balance">Rule of Thirds</option>
+              <option value="perfectly centered symmetrical composition, mirror">Symmetry กึ่งกลาง</option>
+              <option value="low angle worm's eye view, looking up, dramatic perspective">Low Angle มองขึ้น</option>
+              <option value="high angle bird's eye view, looking down, overview">High Angle มองลง</option>
             </select>
           </div>
         </div>
 
         <div>
-          <label>แท็กเพิ่มเติม (เพิ่มสายบุญ)</label>
+          <label>แท็กเพิ่มเติม</label>
           <div class="tag-grid" id="tag-row">
-            <span class="tag" data-v="peaceful and serene, calm atmosphere, zen, mindfulness">🧘‍♂️ สงบร่มเย็น</span>
-            <span class="tag" data-v="buddhist art, spiritual, divine light, holy atmosphere">✨ แสงธรรมศักดิ์สิทธิ์</span>
-            <span class="tag" data-v="lotus flower motif, pure nature, tranquility">🪷 ธรรมชาติบริสุทธิ์</span>
-            <span class="tag" data-v="soft glowing aura, magical illumination">🌟 ออร่าเรืองรอง</span>
             <span class="tag" data-v="award winning photography, international photography award">🏆 Award</span>
+            <span class="tag" data-v="professional color grading, cinematic LUT">🎨 Color graded</span>
+            <span class="tag" data-v="film grain, analog texture">📽 Film grain</span>
             <span class="tag" data-v="lens flare, sun rays, light burst">☀️ Lens flare</span>
             <span class="tag" data-v="vivid saturated vibrant colors, punchy">🌈 Vivid</span>
+            <span class="tag" data-v="muted desaturated pastel tones, subtle">🍃 Pastel</span>
+            <span class="tag" data-v="moody dark dramatic atmosphere, noir">🌑 Moody</span>
             <span class="tag" data-v="dreamy soft focus, romantic haze, ethereal">✨ Dreamy</span>
+            <span class="tag" data-v="long exposure, motion blur, light painting trails">💫 Long exp.</span>
+            <span class="tag" data-v="double exposure artistic blend, surreal montage">🌀 Double exp.</span>
+            <span class="tag" data-v="tilt shift photography, miniature diorama effect">🏙 Tilt shift</span>
+            <span class="tag" data-v="high key bright white airy tones, overexposed beauty">🤍 High key</span>
+            <span class="tag" data-v="low key dark moody, deep blacks, dramatic shadows">🖤 Low key</span>
+            <span class="tag" data-v="ultra high resolution 8K, sharp focus, pixel perfect">🔍 8K Ultra</span>
             <span class="tag" data-v="volumetric light, god rays, light beams through atmosphere">🌤 God rays</span>
+            <span class="tag" data-v="bokeh balls, circular light orbs in background">⭕ Bokeh balls</span>
           </div>
         </div>
 
@@ -464,6 +784,7 @@ footer a:hover { text-decoration: underline; }
       </div>
     </div>
 
+    <!-- CARD 2: ADD TEXT -->
     <div class="card" id="text-card" style="display:none">
       <div class="card-header open" onclick="toggleCard(this)">
         <div class="card-num">3</div>
@@ -474,16 +795,6 @@ footer a:hover { text-decoration: underline; }
         <div class="card-chevron open">▼</div>
       </div>
       <div class="card-body open">
-        
-        <label>ประโยคธรรมะแนะนำ (คลิกเพื่อเติมข้อความตัวโต)</label>
-        <div class="tag-grid" style="margin-bottom: 12px;">
-          <span class="tag" onclick="setDharmaText('ความสุข...\nเกิดจากการปล่อยวาง')">ปล่อยวาง</span>
-          <span class="tag" onclick="setDharmaText('สติมา ปัญญาเกิด')">สติมา ปัญญาเกิด</span>
-          <span class="tag" onclick="setDharmaText('ผู้ให้... ย่อมเป็นที่รัก')">ผู้ให้ย่อมเป็นที่รัก</span>
-          <span class="tag" onclick="setDharmaText('ทำดีได้ดี... ทำชั่วได้ชั่ว')">กฎแห่งกรรม</span>
-          <span class="tag" onclick="setDharmaText('อดีตล่วงไปแล้ว อนาคตยังมาไม่ถึง\nจงอยู่กับปัจจุบัน')">อยู่กับปัจจุบัน</span>
-        </div>
-
         <div class="form-row">
           <div class="form-col">
             <label>ข้อความ</label>
@@ -491,6 +802,7 @@ footer a:hover { text-decoration: underline; }
           </div>
         </div>
 
+        <!-- FONT PICKER -->
         <div style="margin-bottom:12px">
           <label>ฟอนต์ภาษาไทย</label>
           <div class="font-tabs" id="font-tabs">
@@ -515,7 +827,7 @@ footer a:hover { text-decoration: underline; }
             </select>
           </div>
           <div class="form-col">
-            <label>ขนาด (px)</label>
+            <label>ขนาด (px) — ลาก ● ในภาพเพื่อย่อ/ขยาย</label>
             <div class="size-controls">
               <div class="size-btn" onclick="changeSize(-4)">−</div>
               <input type="number" id="txt-size" value="64" min="8" max="800" style="flex:1;text-align:center">
@@ -590,16 +902,19 @@ footer a:hover { text-decoration: underline; }
           </div>
         </div>
 
-        <div class="divider"></div>
-        <div style="background: var(--bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border2); margin-bottom: 12px;">
-          <label>เครดิตเพจ (ลายน้ำเล็กๆ ด้านล่างภาพ)</label>
-          <div style="display: flex; gap: 8px;">
-            <input type="text" id="credit-input" value="เพจ ธรรมะกำลังใจ" style="flex: 1;">
-            <button class="btn btn-sm btn-ghost" onclick="addCreditText()" style="flex-shrink: 0;">+ ใส่เครดิต</button>
+        <!-- BG PILL BEHIND TEXT -->
+        <div class="form-row" style="align-items:center;gap:10px">
+          <label class="overlay-option" style="text-transform:none;letter-spacing:0">
+            <input type="checkbox" id="txt-bg-on" onchange="if(selIdx>=0){textLayers[selIdx].bgOn=this.checked;renderCanvas();}"> พื้นหลังข้อความ
+          </label>
+          <input type="color" id="txt-bg-color" value="#000000" oninput="if(selIdx>=0){textLayers[selIdx].bgColor=this.value;renderCanvas();}">
+          <div class="slider-row" style="flex:1">
+            <input type="range" id="txt-bg-opacity" min="0" max="100" value="50" oninput="document.getElementById('bgo-v').textContent=this.value+'%';if(selIdx>=0){textLayers[selIdx].bgOpacity=parseInt(this.value)/100;renderCanvas();}">
+            <span class="slider-val" id="bgo-v">50%</span>
           </div>
-          <p class="hint" style="margin-top: 6px;">คลิกเพื่อเพิ่มลายน้ำสวยๆ ไว้ตรงกลางด้านล่างภาพโดยอัตโนมัติค่ะ</p>
         </div>
 
+        <div class="divider"></div>
         <div class="btn-group">
           <button class="btn btn-gold" id="add-btn" onclick="addOrUpdateText()">✦ เพิ่มข้อความ</button>
           <button class="btn btn-ghost btn-sm" id="cancel-btn" style="display:none" onclick="cancelEdit()">ยกเลิก</button>
@@ -607,10 +922,24 @@ footer a:hover { text-decoration: underline; }
         </div>
 
         <div class="layer-list" id="layer-list"></div>
-        <p class="hint" style="margin-top:8px"><b>เคล็ดลับ:</b> ลากข้อความในภาพเพื่อย้าย • ลากจุด ● เพื่อย่อ/ขยาย • คลิกรายการเพื่อแก้ไข</p>
+        <p class="hint" style="margin-top:8px"><b>เคล็ดลับ:</b> ลากข้อความในภาพเพื่อย้าย • ลากจุด ● สีน้ำเงินเพื่อย่อ/ขยาย • คลิกรายการเพื่อแก้ไข</p>
+
+        <div class="divider"></div>
+
+        <!-- COLOR SUGGEST -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+            <div class="section-label">แนะนำสีจากภาพ</div>
+            <button class="btn btn-sm btn-ghost" onclick="analyzePalette()">วิเคราะห์</button>
+          </div>
+          <div class="swatch-row" id="swatch-row"></div>
+          <p class="hint" id="swatch-hint"></p>
+        </div>
+
       </div>
     </div>
 
+    <!-- CARD 3: EXPORT -->
     <div class="card" id="export-card" style="display:none">
       <div class="card-header open" onclick="toggleCard(this)">
         <div class="card-num">4</div>
@@ -627,7 +956,15 @@ footer a:hover { text-decoration: underline; }
             <select id="export-fmt">
               <option value="image/png">PNG (ไม่สูญเสียคุณภาพ)</option>
               <option value="image/jpeg">JPEG (ขนาดเล็กกว่า)</option>
+              <option value="image/webp">WebP (สมดุล)</option>
             </select>
+          </div>
+          <div class="form-col" id="jpeg-quality-wrap">
+            <label>คุณภาพ JPEG/WebP</label>
+            <div class="slider-row">
+              <input type="range" id="export-quality" min="50" max="100" value="95" oninput="document.getElementById('eq-v').textContent=this.value+'%'">
+              <span class="slider-val" id="eq-v">95%</span>
+            </div>
           </div>
         </div>
         <div class="form-row" style="align-items:center">
@@ -641,27 +978,39 @@ footer a:hover { text-decoration: underline; }
           <button class="btn btn-ghost btn-sm" onclick="previewImage()">🔍 ดูตัวอย่าง</button>
         </div>
         <div id="export-thumb-wrap" style="display:none;margin-top:10px">
-          <img id="export-thumb" src="" alt="preview" style="max-width:100%;max-height:140px;border-radius:8px;border:1px solid var(--border2);cursor:pointer" onclick="openPreviewFromThumb()">
+          <div style="font-size:11px;color:var(--text3);margin-bottom:6px">ตัวอย่างล่าสุด</div>
+          <div style="position:relative;display:inline-block;cursor:pointer" onclick="openPreviewFromThumb()">
+            <img id="export-thumb" src="" alt="preview" style="max-width:100%;max-height:140px;border-radius:8px;display:block;border:1px solid var(--border2)">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .15s" onmouseover="this.style.background='rgba(0,0,0,0.35)';this.querySelector('span').style.opacity='1'" onmouseout="this.style.background='rgba(0,0,0,0)';this.querySelector('span').style.opacity='0'">
+              <span style="opacity:0;color:#fff;font-size:13px;font-weight:600;transition:opacity .15s">ขยายดู</span>
+            </div>
+          </div>
         </div>
+        <p class="hint" style="margin-top:8px">ภาพที่ดาวน์โหลดจะมีความละเอียดเท่ากับต้นฉบับที่อัปโหลด</p>
       </div>
     </div>
 
   </aside>
 
+  <!-- ─── CONTENT AREA ──────────────────── -->
   <main class="content-area">
     <div class="section-label" style="margin-bottom:12px">ขั้นตอนที่ 2 — อัปโหลดภาพจาก Gemini</div>
 
+    <!-- Upload zone -->
     <div id="upload-zone-wrap">
       <div class="upload-zone" id="drop-zone">
         <input type="file" id="img-upload" accept="image/*" onchange="loadImage(event)">
         <div class="icon">🖼</div>
         <p><strong>คลิกเพื่อเลือกภาพ</strong> หรือลากวางที่นี่</p>
+        <p style="margin-top:6px;font-size:12px">รองรับ JPG, PNG, WebP, GIF — ขนาดสูงสุด 50MB</p>
       </div>
       <div style="display:flex;gap:8px;margin-top:10px">
         <button class="btn btn-ghost btn-sm" onclick="loadSample()">ทดลองด้วยภาพตัวอย่าง</button>
+        <span style="font-size:12px;color:var(--text3);align-self:center">← ไม่มีภาพ? ใช้ภาพตัวอย่างก่อนได้เลย</span>
       </div>
     </div>
 
+    <!-- Canvas toolbar -->
     <div class="canvas-toolbar" id="canvas-toolbar" style="display:none; border-radius:var(--radius-lg) var(--radius-lg) 0 0; margin-top:16px">
       <span class="canvas-toolbar-title">ตัวแก้ไขภาพ</span>
       <button class="btn btn-sm btn-ghost" onclick="document.getElementById('img-upload').click()">เปลี่ยนภาพ</button>
@@ -670,6 +1019,7 @@ footer a:hover { text-decoration: underline; }
       <span id="canvas-size-info" style="font-size:11px;color:var(--text3);margin-left:auto"></span>
     </div>
 
+    <!-- Canvas -->
     <div class="canvas-outer" id="canvas-area" style="border-radius:0 0 var(--radius-lg) var(--radius-lg);border-top:none">
       <div class="canvas-placeholder" id="placeholder">
         <div class="icon">✦</div>
@@ -678,13 +1028,20 @@ footer a:hover { text-decoration: underline; }
       <div id="canvas-container"><canvas id="main-canvas"></canvas></div>
     </div>
 
+    <div id="canvas-info" style="display:none;margin-top:8px;font-size:11px;color:var(--text3)">
+      ลากข้อความเพื่อย้าย • ลากจุด ● เพื่อย่อ/ขยายขนาด • คลิกรายการในแถบซ้ายเพื่อแก้ไข
+    </div>
+
   </main>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <p>ThaiText Studio — เครื่องมือฟรีสำหรับเพิ่มข้อความภาษาไทยบนภาพ AI</p>
+  <p style="margin-top:4px">สร้างด้วย ❤ | <a href="https://fonts.google.com" target="_blank">Google Fonts Thai</a> | ไม่มีการส่งข้อมูลขึ้น Server ทุกอย่างทำบน Browser ของคุณ</p>
 </footer>
 
+<!-- TOAST -->
 <div id="toast"></div>
 
 <script>
@@ -695,11 +1052,21 @@ const FONTS = [
   {f:"'Kanit'",n:"Kanit",s:"คนิต หนักแน่น",cat:"sans"},
   {f:"'Mitr'",n:"Mitr",s:"มิตร กลมกลืน",cat:"sans"},
   {f:"'Chakra Petch'",n:"Chakra Petch",s:"จักรพรรดิ์",cat:"sans"},
+  {f:"'Noto Sans Thai'",n:"Noto Sans Thai",s:"โน้ตซานส์ไทย",cat:"sans"},
+  {f:"'IBM Plex Sans Thai'",n:"IBM Plex Thai",s:"ไอบีเอ็มเพล็กซ์",cat:"sans"},
+  {f:"'K2D'",n:"K2D",s:"เค ทู ดี สปอร์ต",cat:"sans"},
+  {f:"'Krub'",n:"Krub",s:"ครับ เรียบร้อย",cat:"sans"},
+  {f:"'Kodchasan'",n:"Kodchasan",s:"โคดชะสาน",cat:"sans"},
+  {f:"'Thasadith'",n:"Thasadith",s:"ทัศนทิต ชัดเจน",cat:"sans"},
   {f:"'Noto Serif Thai'",n:"Noto Serif Thai",s:"โน้ตเซอริฟไทย",cat:"serif"},
   {f:"'Trirong'",n:"Trirong",s:"ไตรรงค์ คลาสสิก",cat:"serif"},
   {f:"'Fahkwang'",n:"Fahkwang",s:"ฟ้ากว้าง หรูหรา",cat:"serif"},
+  {f:"'Taviraj'",n:"Taviraj",s:"ทวิราช สง่างาม",cat:"serif"},
+  {f:"'Pridi'",n:"Pridi",s:"ปรีดี เซอริฟ",cat:"serif"},
   {f:"'Chonburi'",n:"Chonburi",s:"ชลบุรี โดดเด่น",cat:"display"},
-  {f:"'Charmonman'",n:"Charmonman",s:"ฉัตรมณี ลายมือ",cat:"handwrite"}
+  {f:"'Srisakdi'",n:"Srisakdi",s:"ศรีสักดิ์ ตัวหนา",cat:"display"},
+  {f:"'Charmonman'",n:"Charmonman",s:"ฉัตรมณี ลายมือ",cat:"handwrite"},
+  {f:"'Mali'",n:"Mali",s:"มาลี เป็นกันเอง",cat:"handwrite"},
 ];
 
 let selFont = FONTS[0].f;
@@ -711,16 +1078,19 @@ let history = [];
 let showGrid = false;
 let fontsLoaded = new Set();
 
+// Preload a font into Canvas so it renders correctly
 async function ensureFont(fontFamily, weight) {
   const key = fontFamily + weight;
   if (fontsLoaded.has(key)) return;
   try {
+    // Strip quotes for FontFace API
     const name = fontFamily.replace(/'/g, '');
     await document.fonts.load(`${weight} 40px ${name}`);
     fontsLoaded.add(key);
   } catch(e) {}
 }
 
+// Preload all fonts used in current layers (called before export)
 async function preloadAllFonts() {
   const promises = [];
   for (const l of textLayers) {
@@ -740,6 +1110,7 @@ document.querySelectorAll('.tag[data-v]').forEach(t => {
   };
 });
 
+// Drag & drop on upload zone
 const dropZone = document.getElementById('drop-zone');
 dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = 'var(--gold)'; });
 dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; });
@@ -751,6 +1122,7 @@ dropZone.addEventListener('drop', e => {
 
 buildFontGrid('all');
 
+// ─── CARDS ────────────────────────────────────────────────────────
 function toggleCard(hdr) {
   const body = hdr.nextElementSibling;
   const chev = hdr.querySelector('.card-chevron');
@@ -760,6 +1132,7 @@ function toggleCard(hdr) {
   chev.classList.toggle('open', !isOpen);
 }
 
+// ─── FONT ─────────────────────────────────────────────────────────
 function buildFontGrid(cat) {
   const g = document.getElementById('font-grid');
   const filtered = cat === 'all' ? FONTS : FONTS.filter(f => f.cat === cat);
@@ -775,6 +1148,7 @@ function filterFont(cat, el) {
   el.classList.add('active');
   buildFontGrid(cat);
 }
+// Use data-font attribute to avoid quote-in-onclick bug
 function pickFontByName(el) {
   const name = el.dataset.font;
   const f = "'" + name + "'";
@@ -784,59 +1158,17 @@ function pickFontByName(el) {
   ensureFont(f, '400'); ensureFont(f, '600'); ensureFont(f, '700');
   if (selIdx >= 0) { textLayers[selIdx].font = f; setTimeout(renderCanvas, 150); }
 }
-
-// ─── DHARMA FUNCS ─────────────────────────────────────────────────
-function setDharmaPrompt(txt) {
-  document.getElementById('img-desc').value = txt;
-  document.getElementById('img-style').value = "detailed digital art illustration, concept art, vibrant colors, professional quality";
-  document.getElementById('img-ratio').value = "1:1 square format";
-  document.getElementById('img-light').value = "golden hour, warm amber glow, long low shadows, magic hour";
-  toast('✓ เลือกหมวดภาพธรรมะเรียบร้อยค่ะ');
-}
-
-function setDharmaText(txt) {
-  document.getElementById('txt-input').value = txt;
-  document.getElementById('txt-size').value = 72;
-  document.getElementById('txt-align').value = 'center';
-  document.getElementById('txt-weight').value = '600';
-  document.getElementById('txt-shadow').value = 'strong';
-  toast('✓ เลือกคำคมแล้ว กด "✦ เพิ่มข้อความ" ได้เลยค่ะ');
-}
-
-function addCreditText() {
-  if (!bgImage) { toast('กรุณาอัปโหลดภาพก่อนนะคะ'); return; }
-  saveHistory();
-  const txt = document.getElementById('credit-input').value.trim() || 'เพจ ธรรมะกำลังใจ';
-  const layer = {
-    id: Date.now(),
-    text: txt, font: selFont,
-    size: 24, // ขนาดเล็กสำหรับเครดิต
-    weight: '400',
-    color: 'rgba(255,255,255,0.85)',
-    stroke: '#000000',
-    strokeW: 2,
-    shadow: 'soft',
-    x: 50, // กึ่งกลาง
-    y: 94, // ล่างสุด
-    align: 'center',
-    opacity: 90,
-    spacing: 1,
-    rotate: 0,
-    bgOn: false,
-    bgColor: '#000000',
-    bgOpacity: 0.5,
-    visible: true,
-  };
-  textLayers.push(layer);
-  selIdx = textLayers.length - 1;
-  editMode = true;
-  ensureFont(layer.font, layer.weight).then(() => { renderCanvas(); renderLayerList(); });
-  toast('✓ เพิ่มลายน้ำเครดิตเรียบร้อยค่ะ');
+function pickFont(f, el) {
+  selFont = f;
+  document.querySelectorAll('.font-card').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+  ensureFont(f, '400'); ensureFont(f, '600'); ensureFont(f, '700');
+  if (selIdx >= 0) { textLayers[selIdx].font = f; setTimeout(renderCanvas, 150); }
 }
 
 // ─── PROMPT ───────────────────────────────────────────────────────
 function generatePrompt() {
-  const desc = document.getElementById('img-desc').value.trim() || 'ภาพสวยงามสงบ';
+  const desc = document.getElementById('img-desc').value.trim() || 'ภาพทั่วไปที่สวยงาม';
   const style = document.getElementById('img-style').value;
   const ratio = document.getElementById('img-ratio').value;
   const light = document.getElementById('img-light').value;
@@ -845,39 +1177,59 @@ function generatePrompt() {
   const extras = [...activeTags].join(', ');
 
   const areaMap = {
-    top:      'COMPOSITION REQUIREMENT: Reserve the top 30% of the frame as a clean area with no busy visual elements, to allow text overlay.',
-    bottom:   'COMPOSITION REQUIREMENT: Reserve the bottom 25–30% of the frame as a clean, darker area to allow caption text overlay.',
-    center:   'COMPOSITION REQUIREMENT: Keep the center zone relatively uncluttered for large text overlay.',
+    top:      'COMPOSITION REQUIREMENT: Reserve the top 30% of the frame as a clean, minimally detailed area — simple sky, soft gradient, or blurred background — with no busy visual elements, to allow text overlay to remain legible.',
+    bottom:   'COMPOSITION REQUIREMENT: Reserve the bottom 25–30% of the frame as a clean, darker gradient area (naturally vignetting toward dark) with no key subjects placed there, to allow title/caption text overlay.',
+    center:   'COMPOSITION REQUIREMENT: Keep the center zone of the image relatively uncluttered and open, suitable for large centered text overlay to remain readable.',
+    left:     'COMPOSITION REQUIREMENT: Keep the left third of the image as a simple, low-detail, low-contrast area (soft blur or plain surface) suitable for left-aligned vertical text placement.',
+    right:    'COMPOSITION REQUIREMENT: Keep the right third of the image as a simple, low-detail area suitable for right-aligned text overlay.',
+    fullbleed:'COMPOSITION REQUIREMENT: Ensure the overall image has a moderate tonal range with some areas of relative simplicity across the frame, allowing text overlays at various positions to remain legible.',
     none:     ''
   };
 
   const parts = [
-    `Subject: ${desc}`, ``, `Style: ${style}`,
+    `Subject: ${desc}`,
+    ``,
+    `Style: ${style}`,
     ratio ? `Aspect ratio: ${ratio}` : '',
     light ? `Lighting: ${light}` : '',
     comp  ? `Composition: ${comp}` : '',
     extras ? `Additional qualities: ${extras}` : '',
     ``,
-    `=== CRITICAL REQUIREMENTS ===`,
-    `1. The image must contain ZERO text, ZERO letters, ZERO numbers, and ZERO watermarks anywhere in the image.`,
-    areaMap[area] || ''
+    `=== CRITICAL REQUIREMENTS (DO NOT IGNORE) ===`,
+    `1. The image must contain ZERO text, ZERO letters, ZERO numbers, ZERO words, ZERO typography, ZERO signage, ZERO logos, ZERO watermarks, and ZERO writing of any kind anywhere in the entire image. This is mandatory.`,
+    areaMap[area] || '',
+    `3. Render at professional commercial quality with expert post-processing, color grading, and tonal balance.`,
   ].filter(Boolean).join('\n');
 
   document.getElementById('prompt-text').textContent = parts;
   document.getElementById('prompt-output').style.display = 'block';
+  // Auto-copy so user can paste into Gemini immediately
   navigator.clipboard.writeText(parts).then(() => {
-    toast('✦ สร้าง Prompt และคัดลอกเรียบร้อยค่ะ ไปที่ Gemini ได้เลย');
+    toast('✦ สร้าง Prompt เรียบร้อย — คัดลอกแล้ว! เปิด Gemini แล้ววางได้เลย');
+    const msg = document.getElementById('copy-msg');
+    msg.style.display = 'inline';
+    setTimeout(() => msg.style.display = 'none', 3000);
+  }).catch(() => {
+    toast('✦ สร้าง Prompt เรียบร้อย — กด "คัดลอก" แล้วไปวางใน Gemini');
   });
 }
 
 function copyPrompt() {
   const t = document.getElementById('prompt-text').textContent;
-  if (!t) return;
-  navigator.clipboard.writeText(t).then(() => toast('✓ คัดลอก Prompt แล้วค่ะ'));
+  if (!t) { generatePrompt(); return; }
+  navigator.clipboard.writeText(t).then(() => {
+    document.getElementById('copy-msg').style.display = 'inline';
+    setTimeout(() => document.getElementById('copy-msg').style.display = 'none', 2500);
+    toast('✓ คัดลอก Prompt แล้ว');
+  });
 }
 
 // ─── IMAGE LOAD ────────────────────────────────────────────────────
-function loadImage(e) { const file = e.target.files[0]; if (file) loadImageFile(file); }
+function loadImage(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  loadImageFile(file);
+}
 function loadImageFile(file) {
   const reader = new FileReader();
   reader.onload = ev => {
@@ -888,46 +1240,78 @@ function loadImageFile(file) {
   reader.readAsDataURL(file);
 }
 function loadSample() {
-  const c = document.createElement('canvas'); c.width = 1080; c.height = 1080;
+  const c = document.createElement('canvas'); c.width = 1200; c.height = 675;
   const ctx = c.getContext('2d');
-  const sky = ctx.createLinearGradient(0, 0, 0, 1080);
-  sky.addColorStop(0, '#f2d094'); sky.addColorStop(0.5, '#e58e6e'); sky.addColorStop(1, '#56384a');
-  ctx.fillStyle = sky; ctx.fillRect(0, 0, 1080, 1080);
-  ctx.beginPath(); ctx.arc(540, 400, 150, 0, Math.PI*2);
-  ctx.fillStyle = '#ffedb3'; ctx.fill();
+  // Sky gradient
+  const sky = ctx.createLinearGradient(0, 0, 0, 675);
+  sky.addColorStop(0, '#070d1a'); sky.addColorStop(0.5, '#1a2d5c'); sky.addColorStop(0.8, '#2d4a7a'); sky.addColorStop(1, '#0a2040');
+  ctx.fillStyle = sky; ctx.fillRect(0, 0, 1200, 675);
+  // Stars
+  for (let i = 0; i < 200; i++) {
+    ctx.beginPath(); ctx.arc(Math.random()*1200, Math.random()*450, Math.random()*1.5, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${Math.random()*.8+.2})`; ctx.fill();
+  }
+  // Moon glow
+  const moon = ctx.createRadialGradient(900, 130, 5, 900, 130, 200);
+  moon.addColorStop(0, 'rgba(255,240,180,.7)'); moon.addColorStop(0.2, 'rgba(255,220,120,.25)'); moon.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = moon; ctx.fillRect(0, 0, 1200, 675);
+  // Moon disc
+  ctx.beginPath(); ctx.arc(900, 130, 40, 0, Math.PI*2);
+  ctx.fillStyle = '#fff8e8'; ctx.fill();
+  // Horizon glow
+  const hor = ctx.createLinearGradient(0, 400, 0, 550);
+  hor.addColorStop(0, 'rgba(40,80,160,.4)'); hor.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = hor; ctx.fillRect(0, 0, 1200, 675);
+  // Dark vignette bottom
+  const vig = ctx.createLinearGradient(0, 450, 0, 675);
+  vig.addColorStop(0, 'rgba(0,0,0,0)'); vig.addColorStop(1, 'rgba(0,0,0,.88)');
+  ctx.fillStyle = vig; ctx.fillRect(0, 0, 1200, 675);
+  // Rice field silhouette
+  ctx.fillStyle = '#050c1a';
+  for (let x = 0; x < 1200; x += 4) {
+    const h = 180 + Math.sin(x*0.015)*30 + Math.sin(x*0.04)*15 + Math.random()*8;
+    ctx.fillRect(x, 675-h, 4, h);
+  }
   const img = new Image();
   img.onload = () => { bgImage = img; textLayers = []; selIdx = -1; history = []; setupCanvas(); };
   img.src = c.toDataURL();
-  toast('✓ โหลดภาพตัวอย่างเรียบร้อยค่ะ');
+  toast('โหลดภาพตัวอย่างเรียบร้อย');
 }
 
+// ─── CANVAS SETUP ──────────────────────────────────────────────────
 function setupCanvas() {
   const mc = document.getElementById('main-canvas');
   const area = document.getElementById('canvas-area');
   const maxW = Math.min(bgImage.width, area.clientWidth - 2 || 900);
   const scale = maxW / bgImage.width;
-  mc.width = bgImage.width * scale; mc.height = bgImage.height * scale;
+  mc.width = bgImage.width * scale;
+  mc.height = bgImage.height * scale;
   document.getElementById('placeholder').style.display = 'none';
   document.getElementById('canvas-container').style.display = 'block';
   document.getElementById('canvas-toolbar').style.display = 'flex';
+  document.getElementById('canvas-info').style.display = 'block';
   document.getElementById('text-card').style.display = 'block';
   document.getElementById('export-card').style.display = 'block';
   document.getElementById('canvas-size-info').textContent = `${bgImage.width} × ${bgImage.height}px`;
   bindEvents(mc);
   renderCanvas();
+  toast('✓ โหลดภาพเรียบร้อย');
 }
 
+// ─── GRID ──────────────────────────────────────────────────────────
 function toggleGrid() {
   showGrid = !showGrid;
   document.getElementById('grid-btn').textContent = showGrid ? 'ซ่อนเส้น' : 'เส้นนำ';
   renderCanvas();
 }
 
+// ─── HANDLE POSITION ───────────────────────────────────────────────
 function getHandlePos(mc, l) {
   const size = Math.round(l.size * (mc.width / 800));
   const ctx = mc.getContext('2d');
   ctx.font = `${l.weight} ${size}px ${l.font}, 'Sarabun', sans-serif`;
-  const tw = ctx.measureText(l.text).width;
+  const m = ctx.measureText(l.text);
+  const tw = m.width;
   const x = mc.width * l.x / 100, y = mc.height * l.y / 100;
   let hx = x + tw / 2 + 14;
   if (l.align === 'left') hx = x + tw + 14;
@@ -935,6 +1319,7 @@ function getHandlePos(mc, l) {
   return { x: Math.min(mc.width - 10, hx), y };
 }
 
+// ─── EVENTS ────────────────────────────────────────────────────────
 function bindEvents(mc) {
   function getXY(e, rect) {
     if (e.touches) return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
@@ -988,6 +1373,7 @@ function bindEvents(mc) {
   mc.addEventListener('touchend', onUp);
 }
 
+// ─── SELECT / EDIT LAYER ───────────────────────────────────────────
 function selectLayer(i) {
   selIdx = i; editMode = true;
   const l = textLayers[i];
@@ -1006,6 +1392,10 @@ function selectLayer(i) {
   document.getElementById('txt-spacing').value = l.spacing || 0; document.getElementById('sp-v').textContent = (l.spacing || 0) + 'px';
   document.getElementById('txt-rotate').value = l.rotate || 0; document.getElementById('ro-v').textContent = (l.rotate || 0) + '°';
   document.getElementById('txt-align').value = l.align;
+  document.getElementById('txt-bg-on').checked = l.bgOn || false;
+  document.getElementById('txt-bg-color').value = l.bgColor || '#000000';
+  document.getElementById('txt-bg-opacity').value = Math.round((l.bgOpacity || 0.5) * 100);
+  document.getElementById('bgo-v').textContent = Math.round((l.bgOpacity || 0.5) * 100) + '%';
   document.getElementById('add-btn').textContent = '✦ อัปเดตข้อความ';
   document.getElementById('cancel-btn').style.display = 'inline-flex';
   renderLayerList();
@@ -1038,7 +1428,7 @@ function changeSize(d) {
 function addOrUpdateText() {
   const txt = document.getElementById('txt-input').value.trim();
   if (!txt) return;
-  if (!bgImage) { toast('กรุณาอัปโหลดภาพก่อนค่ะ'); return; }
+  if (!bgImage) { toast('กรุณาอัปโหลดภาพก่อน'); return; }
   saveHistory();
   const layer = {
     id: editMode && selIdx >= 0 ? textLayers[selIdx].id : Date.now(),
@@ -1055,7 +1445,9 @@ function addOrUpdateText() {
     opacity: parseInt(document.getElementById('txt-opacity').value),
     spacing: parseInt(document.getElementById('txt-spacing').value) || 0,
     rotate: parseInt(document.getElementById('txt-rotate').value) || 0,
-    bgOn: false,
+    bgOn: document.getElementById('txt-bg-on').checked,
+    bgColor: document.getElementById('txt-bg-color').value,
+    bgOpacity: parseInt(document.getElementById('txt-bg-opacity').value) / 100,
     visible: true,
   };
   if (editMode && selIdx >= 0) { textLayers[selIdx] = layer; }
@@ -1063,24 +1455,28 @@ function addOrUpdateText() {
   document.getElementById('add-btn').textContent = '✦ อัปเดตข้อความ';
   document.getElementById('cancel-btn').style.display = 'inline-flex';
   document.getElementById('txt-input').value = '';
+  // Preload this font then render — ensures Canvas shows correct font
   ensureFont(layer.font, layer.weight).then(() => { renderCanvas(); renderLayerList(); });
-  toast('✓ ดำเนินการเรียบร้อยค่ะ');
+  toast('✓ เพิ่มข้อความเรียบร้อย');
 }
 function removeLayer(i) { saveHistory(); textLayers.splice(i, 1); if (selIdx === i) cancelEdit(); else if (selIdx > i) selIdx--; renderCanvas(); renderLayerList(); }
 function moveLayer(i, d) { const j = i + d; if (j < 0 || j >= textLayers.length) return; [textLayers[i], textLayers[j]] = [textLayers[j], textLayers[i]]; if (selIdx === i) selIdx = j; else if (selIdx === j) selIdx = i; renderCanvas(); renderLayerList(); }
 function toggleVisible(i, e) { e.stopPropagation(); textLayers[i].visible = !textLayers[i].visible; renderCanvas(); renderLayerList(); }
-function clearTexts() { saveHistory(); textLayers = []; cancelEdit(); renderCanvas(); renderLayerList(); toast('ล้างข้อความทั้งหมดแล้วค่ะ'); }
+function clearTexts() { saveHistory(); textLayers = []; cancelEdit(); renderCanvas(); renderLayerList(); toast('ล้างข้อความทั้งหมดแล้ว'); }
 
+// ─── UNDO ──────────────────────────────────────────────────────────
 function saveHistory() { history.push(JSON.stringify(textLayers)); if (history.length > 30) history.shift(); }
 function undoLayer() {
-  if (!history.length) return;
+  if (!history.length) { toast('ไม่มีสิ่งที่จะ Undo'); return; }
   textLayers = JSON.parse(history.pop());
   selIdx = -1; editMode = false;
   document.getElementById('add-btn').textContent = '✦ เพิ่มข้อความ';
   document.getElementById('cancel-btn').style.display = 'none';
   renderCanvas(); renderLayerList();
+  toast('↩ Undo เรียบร้อย');
 }
 
+// ─── LAYER LIST ────────────────────────────────────────────────────
 function renderLayerList() {
   const el = document.getElementById('layer-list');
   if (!textLayers.length) { el.innerHTML = ''; return; }
@@ -1089,12 +1485,97 @@ function renderLayerList() {
       <div class="layer-dot" style="background:${l.color}"></div>
       <div class="layer-text-preview" style="font-family:${l.font};color:${l.color};font-weight:${l.weight};opacity:${l.visible ? 1 : 0.35}">${l.text}</div>
       <div class="layer-actions">
-        <div class="layer-vis" onclick="toggleVisible(${i},event)">${l.visible ? '👁' : '🙈'}</div>
+        <div class="layer-vis" onclick="toggleVisible(${i},event)" title="${l.visible ? 'ซ่อน' : 'แสดง'}">${l.visible ? '👁' : '🙈'}</div>
         <button class="btn btn-icon btn-ghost btn-sm" onclick="event.stopPropagation();moveLayer(${i},-1)">↑</button>
         <button class="btn btn-icon btn-ghost btn-sm" onclick="event.stopPropagation();moveLayer(${i},1)">↓</button>
         <button class="btn btn-icon btn-sm" style="background:rgba(224,82,82,.1);border-color:rgba(224,82,82,.25);color:var(--red)" onclick="event.stopPropagation();removeLayer(${i})">✕</button>
       </div>
     </div>`).join('');
+}
+
+// ─── RENDER ────────────────────────────────────────────────────────
+function renderCanvas() {
+  if (!bgImage) return;
+  const mc = document.getElementById('main-canvas');
+  const ctx = mc.getContext('2d');
+  ctx.clearRect(0, 0, mc.width, mc.height);
+  ctx.drawImage(bgImage, 0, 0, mc.width, mc.height);
+
+  // Grid
+  if (showGrid) {
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.lineWidth = 0.5;
+    for (let x = mc.width / 3; x < mc.width; x += mc.width / 3) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, mc.height); ctx.stroke(); }
+    for (let y = mc.height / 3; y < mc.height; y += mc.height / 3) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(mc.width, y); ctx.stroke(); }
+  }
+
+  textLayers.forEach((l, i) => {
+    if (!l.visible) return;
+    const size = Math.round(l.size * (mc.width / 800));
+    ctx.save();
+    const x = mc.width * l.x / 100, y = mc.height * l.y / 100;
+    ctx.translate(x, y);
+    if (l.rotate) ctx.rotate(l.rotate * Math.PI / 180);
+    ctx.globalAlpha = l.opacity / 100;
+    const fontName = l.font.replace(/'/g, '');
+    ctx.font = `${l.weight} ${size}px "${fontName}", Sarabun, sans-serif`;
+    ctx.textAlign = l.align; ctx.textBaseline = 'middle';
+
+    // Background pill
+    if (l.bgOn) {
+      const m = ctx.measureText(l.text);
+      const tw = m.width, pad = size * 0.3, th = size * 1.4;
+      let bx = -pad;
+      if (l.align === 'center') bx = -tw / 2 - pad;
+      if (l.align === 'right') bx = -tw - pad;
+      const [r2, g2, b2] = hexRgb(l.bgColor);
+      ctx.fillStyle = `rgba(${r2},${g2},${b2},${l.bgOpacity})`;
+      roundRect(ctx, bx, -th / 2, tw + pad * 2, th, size * 0.15);
+      ctx.fill();
+    }
+
+    const shadows = {
+      none: null,
+      soft: [{ b: 6, o: 2, c: 'rgba(0,0,0,.55)' }],
+      strong: [{ b: 12, o: 4, c: 'rgba(0,0,0,.9)' }],
+      glow: [{ b: 20, o: 0, c: l.color }],
+      hard: [{ b: 0, o: 6, c: 'rgba(0,0,0,.95)' }],
+      multi: [{ b: 2, o: 1, c: 'rgba(0,0,0,.5)' }, { b: 10, o: 3, c: 'rgba(0,0,0,.3)' }, { b: 20, o: 6, c: 'rgba(0,0,0,.15)' }],
+    };
+    const sh = shadows[l.shadow];
+
+    // Letter spacing
+    if (l.spacing && l.spacing !== 0) {
+      drawSpacedText(ctx, l, size, sh, 0, 0);
+    } else {
+      if (sh) { const s = sh[sh.length - 1]; ctx.shadowColor = s.c; ctx.shadowBlur = s.b; ctx.shadowOffsetX = s.o; ctx.shadowOffsetY = s.o; }
+      const sw = parseInt(l.strokeW);
+      if (sw > 0) { ctx.strokeStyle = l.stroke; ctx.lineWidth = sw * 2; ctx.lineJoin = 'round'; ctx.strokeText(l.text, 0, 0); }
+      ctx.fillStyle = l.color; ctx.fillText(l.text, 0, 0);
+    }
+
+    // Selection
+    if (i === selIdx) {
+      ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
+      ctx.save(); ctx.globalAlpha = 1;
+      const m = ctx.measureText(l.text);
+      const tw = m.width, th = size * 1.3;
+      let ox = -2;
+      if (l.align === 'center') ox = -tw / 2 - 4;
+      if (l.align === 'right') ox = -tw - 4;
+      ctx.strokeStyle = 'rgba(74,158,221,0.8)'; ctx.lineWidth = 1.5; ctx.setLineDash([5, 3]);
+      ctx.strokeRect(ox, -th / 2 - 2, tw + 8, th + 4); ctx.setLineDash([]);
+      // Handle
+      const hp = getHandlePos(mc, l);
+      const hx = hp.x - x, hy = 0;
+      ctx.beginPath(); ctx.arc(hx, hy, 8, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(74,158,221,.9)'; ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('↔', hx, hy);
+      ctx.restore();
+    }
+    ctx.restore();
+  });
 }
 
 function drawSpacedText(ctx, l, size, sh, x, y) {
@@ -1114,86 +1595,79 @@ function drawSpacedText(ctx, l, size, sh, x, y) {
   });
 }
 
-function renderCanvas() {
-  if (!bgImage) return;
-  const mc = document.getElementById('main-canvas');
-  const ctx = mc.getContext('2d');
-  ctx.clearRect(0, 0, mc.width, mc.height);
-  ctx.drawImage(bgImage, 0, 0, mc.width, mc.height);
-
-  if (showGrid) {
-    ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.lineWidth = 0.5;
-    for (let x = mc.width / 3; x < mc.width; x += mc.width / 3) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, mc.height); ctx.stroke(); }
-    for (let y = mc.height / 3; y < mc.height; y += mc.height / 3) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(mc.width, y); ctx.stroke(); }
-  }
-
-  textLayers.forEach((l, i) => {
-    if (!l.visible) return;
-    const size = Math.round(l.size * (mc.width / 800));
-    ctx.save();
-    const x = mc.width * l.x / 100, y = mc.height * l.y / 100;
-    ctx.translate(x, y);
-    if (l.rotate) ctx.rotate(l.rotate * Math.PI / 180);
-    ctx.globalAlpha = l.opacity / 100;
-    const fontName = l.font.replace(/'/g, '');
-    ctx.font = `${l.weight} ${size}px "${fontName}", Sarabun, sans-serif`;
-    ctx.textAlign = l.align; ctx.textBaseline = 'middle';
-
-    const shadows = {
-      none: null,
-      soft: [{ b: 6, o: 2, c: 'rgba(0,0,0,.55)' }],
-      strong: [{ b: 12, o: 4, c: 'rgba(0,0,0,.9)' }],
-      glow: [{ b: 20, o: 0, c: l.color }],
-      hard: [{ b: 0, o: 6, c: 'rgba(0,0,0,.95)' }],
-      multi: [{ b: 2, o: 1, c: 'rgba(0,0,0,.5)' }, { b: 10, o: 3, c: 'rgba(0,0,0,.3)' }, { b: 20, o: 6, c: 'rgba(0,0,0,.15)' }],
-    };
-    const sh = shadows[l.shadow];
-
-    if (l.spacing && l.spacing !== 0) {
-      drawSpacedText(ctx, l, size, sh, 0, 0);
-    } else {
-      if (sh) { const s = sh[sh.length - 1]; ctx.shadowColor = s.c; ctx.shadowBlur = s.b; ctx.shadowOffsetX = s.o; ctx.shadowOffsetY = s.o; }
-      const sw = parseInt(l.strokeW);
-      if (sw > 0) { ctx.strokeStyle = l.stroke; ctx.lineWidth = sw * 2; ctx.lineJoin = 'round'; ctx.strokeText(l.text, 0, 0); }
-      ctx.fillStyle = l.color; ctx.fillText(l.text, 0, 0);
-    }
-
-    if (i === selIdx) {
-      ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
-      ctx.save(); ctx.globalAlpha = 1;
-      const m = ctx.measureText(l.text);
-      const tw = m.width, th = size * 1.3;
-      let ox = -2;
-      if (l.align === 'center') ox = -tw / 2 - 4;
-      if (l.align === 'right') ox = -tw - 4;
-      ctx.strokeStyle = 'rgba(74,158,221,0.8)'; ctx.lineWidth = 1.5; ctx.setLineDash([5, 3]);
-      ctx.strokeRect(ox, -th / 2 - 2, tw + 8, th + 4); ctx.setLineDash([]);
-      const hp = getHandlePos(mc, l);
-      const hx = hp.x - x, hy = 0;
-      ctx.beginPath(); ctx.arc(hx, hy, 8, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(74,158,221,.9)'; ctx.fill();
-      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
-      ctx.fillStyle = '#fff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('↔', hx, hy);
-      ctx.restore();
-    }
-    ctx.restore();
-  });
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath(); ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y); ctx.arcTo(x + w, y, x + w, y + r, r);
+  ctx.lineTo(x + w, y + h - r); ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+  ctx.lineTo(x + r, y + h); ctx.arcTo(x, y + h, x, y + h - r, r);
+  ctx.lineTo(x, y + r); ctx.arcTo(x, y, x + r, y, r);
+  ctx.closePath();
 }
 
+// ─── COLOR PALETTE ─────────────────────────────────────────────────
+function analyzePalette() {
+  if (!bgImage) return;
+  const tc = document.createElement('canvas'); tc.width = 80; tc.height = 45;
+  const ctx = tc.getContext('2d'); ctx.drawImage(bgImage, 0, 0, 80, 45);
+  const data = ctx.getImageData(0, 0, 80, 45).data;
+  const buckets = {};
+  for (let i = 0; i < data.length; i += 12) {
+    const r = Math.round(data[i] / 32) * 32, g = Math.round(data[i + 1] / 32) * 32, b = Math.round(data[i + 2] / 32) * 32;
+    const k = `${r},${g},${b}`; buckets[k] = (buckets[k] || 0) + 1;
+  }
+  const sorted = Object.entries(buckets).sort((a, b) => b[1] - a[1]).slice(0, 14);
+  const sw = sorted.map(([k]) => { const [r, g, b] = k.split(',').map(Number); return { r, g, b, hex: rgbHex(r, g, b), lum: 0.299 * r + 0.587 * g + 0.114 * b }; });
+  const brightest = sw.slice().sort((a, b) => b.lum - a.lum)[0];
+  const darkest = sw.slice().sort((a, b) => a.lum - b.lum)[0];
+  const suggestions = [
+    { hex: '#ffffff', label: 'ขาว' }, { hex: '#000000', label: 'ดำ' },
+    { hex: lightenHex(brightest.hex), label: 'สว่าง' },
+    { hex: darkenHex(darkest.hex), label: 'เข้ม' },
+    ...sw.slice(0, 8).map(s => ({ hex: s.hex, label: 'ภาพ' }))
+  ];
+  const sr = document.getElementById('swatch-row');
+  sr.innerHTML = suggestions.map(s => `
+    <div>
+      <div class="swatch" title="${s.label} ${s.hex}" style="background:${s.hex}" onclick="applyColor('${s.hex}')"></div>
+      <div class="swatch-label">${s.label}</div>
+    </div>`).join('');
+  document.getElementById('swatch-hint').textContent = 'คลิกสีเพื่อใช้กับข้อความที่เลือก';
+  toast('✓ วิเคราะห์สีเรียบร้อย — ' + suggestions.length + ' สี');
+}
+function applyColor(hex) {
+  document.getElementById('txt-color').value = hex;
+  document.getElementById('txt-color-hex').value = hex;
+  if (selIdx >= 0) { textLayers[selIdx].color = hex; renderCanvas(); }
+  document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+// ─── EXPORT ────────────────────────────────────────────────────────
+// size is ALWAYS scaled from 800-base, same as preview — never use raw l.size for hi-res
 function drawLayersOnCanvas(ctx, fullW, fullH) {
   textLayers.forEach(l => {
     if (!l.visible) return;
+    // KEY FIX: always scale from 800-base so hi-res matches preview exactly
     const size = Math.round(l.size * (fullW / 800));
     ctx.save();
     const x = fullW * l.x / 100, y = fullH * l.y / 100;
     ctx.translate(x, y);
     if (l.rotate) ctx.rotate(l.rotate * Math.PI / 180);
     ctx.globalAlpha = l.opacity / 100;
+    // KEY FIX: use document.fonts-loaded font name without extra fallback confusion
     const fontName = l.font.replace(/'/g, '');
     ctx.font = `${l.weight} ${size}px "${fontName}", Sarabun, sans-serif`;
     ctx.textAlign = l.align; ctx.textBaseline = 'middle';
-    
+    if (l.bgOn) {
+      const m = ctx.measureText(l.text);
+      const tw = m.width, pad = size * 0.3, th = size * 1.4;
+      let bx = -pad;
+      if (l.align === 'center') bx = -tw / 2 - pad;
+      if (l.align === 'right') bx = -tw - pad;
+      const [r2, g2, b2] = hexRgb(l.bgColor);
+      ctx.fillStyle = `rgba(${r2},${g2},${b2},${l.bgOpacity})`;
+      roundRect(ctx, bx, -th / 2, tw + pad * 2, th, size * 0.15); ctx.fill();
+    }
     const sh = { none: null, soft: { b: 8, o: 3, c: 'rgba(0,0,0,.55)' }, strong: { b: 18, o: 6, c: 'rgba(0,0,0,.9)' }, glow: { b: 28, o: 0, c: l.color }, hard: { b: 0, o: 8, c: 'rgba(0,0,0,.95)' }, multi: { b: 14, o: 4, c: 'rgba(0,0,0,.7)' } };
     const s = sh[l.shadow];
     if (s) { ctx.shadowColor = s.c; ctx.shadowBlur = s.b; ctx.shadowOffsetX = s.o; ctx.shadowOffsetY = s.o; }
@@ -1205,8 +1679,10 @@ function drawLayersOnCanvas(ctx, fullW, fullH) {
 }
 
 async function getExportCanvas() {
+  // Preload all fonts used — wait until Canvas can actually render them
   toast('⏳ กำลังโหลดฟอนต์...');
   await preloadAllFonts();
+  // Extra settle time for fonts to fully apply in Canvas context
   await new Promise(r => setTimeout(r, 200));
 
   const hires = document.getElementById('export-hires').checked;
@@ -1220,8 +1696,11 @@ async function getExportCanvas() {
   return full;
 }
 
+// cache last export data URL for preview/re-download
 let lastExportDataUrl = '';
 let lastExportExt = 'png';
+let lastExportFmt = 'image/png';
+let lastExportQuality = 0.95;
 
 async function exportImage() {
   if (!bgImage) return;
@@ -1229,18 +1708,24 @@ async function exportImage() {
   if (btn) { btn.textContent = '⏳ กำลังเตรียม...'; btn.disabled = true; }
   try {
     const fmt = document.getElementById('export-fmt').value;
+    const q = parseInt(document.getElementById('export-quality').value) / 100;
     const full = await getExportCanvas();
-    const ext = fmt === 'image/png' ? 'png' : 'jpg';
-    const dataUrl = full.toDataURL(fmt, 0.95);
+    const ext = fmt === 'image/png' ? 'png' : fmt === 'image/webp' ? 'webp' : 'jpg';
+    const dataUrl = full.toDataURL(fmt, q);
     lastExportDataUrl = dataUrl;
     lastExportExt = ext;
-    document.getElementById('export-thumb').src = dataUrl;
+    lastExportFmt = fmt;
+    lastExportQuality = q;
+    // Show thumbnail in export card
+    const thumb = document.getElementById('export-thumb');
+    thumb.src = dataUrl;
     document.getElementById('export-thumb-wrap').style.display = 'block';
+    // Trigger actual download
     const a = document.createElement('a');
-    a.download = `thaitext-dhamma.${ext}`;
+    a.download = `thaitext-studio.${ext}`;
     a.href = dataUrl;
     a.click();
-    toast('✓ ดาวน์โหลดภาพเรียบร้อยค่ะ');
+    toast('✓ ดาวน์โหลดเรียบร้อย — คลิกภาพตัวอย่างด้านล่างเพื่อขยายดู');
   } finally {
     if (btn) { btn.textContent = '⬇ ดาวน์โหลดภาพ'; btn.disabled = false; }
   }
@@ -1252,28 +1737,35 @@ async function previewImage() {
   if (btn) { btn.textContent = '⏳...'; btn.disabled = true; }
   try {
     const fmt = document.getElementById('export-fmt').value;
+    const q = parseInt(document.getElementById('export-quality').value) / 100;
     const full = await getExportCanvas();
-    const ext = fmt === 'image/png' ? 'png' : 'jpg';
-    const dataUrl = full.toDataURL(fmt, 0.95);
+    const ext = fmt === 'image/png' ? 'png' : fmt === 'image/webp' ? 'webp' : 'jpg';
+    const dataUrl = full.toDataURL(fmt, q);
     lastExportDataUrl = dataUrl;
     lastExportExt = ext;
+    lastExportFmt = fmt;
+    lastExportQuality = q;
+    // Show thumbnail
     document.getElementById('export-thumb').src = dataUrl;
     document.getElementById('export-thumb-wrap').style.display = 'block';
-    
-    document.getElementById('preview-img').src = dataUrl;
-    document.getElementById('preview-info').textContent = `${full.width} × ${full.height}px · ${ext.toUpperCase()}`;
-    document.getElementById('preview-backdrop').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    // Open preview modal
+    showPreviewModal(dataUrl, full.width, full.height, ext);
   } finally {
     if (btn) { btn.textContent = '🔍 ดูตัวอย่าง'; btn.disabled = false; }
   }
 }
 
+function showPreviewModal(dataUrl, w, h, ext) {
+  document.getElementById('preview-img').src = dataUrl;
+  document.getElementById('preview-info').textContent = `${w} × ${h}px · ${ext.toUpperCase()}`;
+  document.getElementById('preview-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
 function openPreviewFromThumb() {
-  if (lastExportDataUrl) {
-    document.getElementById('preview-img').src = lastExportDataUrl;
-    document.getElementById('preview-backdrop').classList.add('open');
-  }
+  if (!lastExportDataUrl) return;
+  const img = document.getElementById('export-thumb');
+  showPreviewModal(lastExportDataUrl, bgImage.width, bgImage.height, lastExportExt);
 }
 
 function closePreview() {
@@ -1285,13 +1777,66 @@ function closePreviewIfOutside(e) {
 }
 
 function triggerDownload() {
-  if (lastExportDataUrl) {
-    const a = document.createElement('a');
-    a.download = `thaitext-dhamma.${lastExportExt}`;
-    a.href = lastExportDataUrl;
-    a.click();
-  }
+  if (!lastExportDataUrl) { exportImage(); return; }
+  const a = document.createElement('a');
+  a.download = `thaitext-studio.${lastExportExt}`;
+  a.href = lastExportDataUrl;
+  a.click();
+  toast('✓ ดาวน์โหลดเรียบร้อย');
 }
+
+async function copyPreviewToClipboard() {
+  if (!lastExportDataUrl) return;
+  try {
+    const res = await fetch(lastExportDataUrl);
+    const blob = await res.blob();
+    await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+    toast('✓ คัดลอกภาพแล้ว');
+  } catch { toast('ไม่สามารถคัดลอกได้ในเบราว์เซอร์นี้ — ใช้ดาวน์โหลดแทน'); }
+}
+
+async function copyImageToClipboard() {
+  if (!bgImage) return;
+  try {
+    const full = await getExportCanvas();
+    full.toBlob(async blob => {
+      try {
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        toast('✓ คัดลอกภาพไปยัง Clipboard แล้ว');
+      } catch { toast('ไม่สามารถคัดลอกได้ — ลองดาวน์โหลดแทน'); }
+    }, 'image/png');
+  } catch(e) { toast('เกิดข้อผิดพลาด: ' + e.message); }
+}
+
+// Close preview on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closePreview(); closeShare(); }
+});
+
+// ─── THEME ─────────────────────────────────────────────────────────
+function setTheme(name, el) {
+  document.documentElement.setAttribute('data-theme', name);
+  document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+  if (el) el.classList.add('active');
+  else {
+    const dot = document.querySelector(`.theme-dot[data-theme="${name}"]`);
+    if (dot) dot.classList.add('active');
+  }
+  try { localStorage.setItem('thaitext-theme', name); } catch(e) {}
+}
+// Restore saved theme on load
+(function() {
+  try {
+    const saved = localStorage.getItem('thaitext-theme');
+    if (saved) setTheme(saved, null);
+  } catch(e) {}
+})();
+
+// ─── HELPERS ───────────────────────────────────────────────────────
+function rgbHex(r, g, b) { return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join(''); }
+function lightenHex(hex) { let [r, g, b] = hexRgb(hex); return rgbHex(Math.min(255, r + 110), Math.min(255, g + 110), Math.min(255, b + 110)); }
+function darkenHex(hex) { let [r, g, b] = hexRgb(hex); return rgbHex(Math.max(0, r - 90), Math.max(0, g - 90), Math.max(0, b - 90)); }
+function hexRgb(hex) { return [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)]; }
 
 function toast(msg) {
   const t = document.getElementById('toast');
@@ -1299,18 +1844,79 @@ function toast(msg) {
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-function setTheme(name, el) {
-  document.documentElement.setAttribute('data-theme', name);
-  document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
-  if (el) el.classList.add('active');
-  try { localStorage.setItem('thaitext-theme', name); } catch(e) {}
+// ─── SHARE ─────────────────────────────────────────────────────────
+function getPageUrl() {
+  return window.location.href.split('?')[0];
 }
-(function() {
-  try {
-    const saved = localStorage.getItem('thaitext-theme');
-    if (saved) setTheme(saved, null);
-  } catch(e) {}
-})();
+function getShareText() {
+  return 'ThaiText Studio — เครื่องมือเพิ่มข้อความภาษาไทยบนภาพ Gemini ฟรี! ตัวอักษรถูกต้อง ไม่เพี้ยน ✨';
+}
+function openShare() {
+  const url = getPageUrl();
+  document.getElementById('share-url-input').value = url;
+  document.getElementById('share-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeShare() {
+  document.getElementById('share-backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('copy-url-btn').textContent = 'คัดลอกลิงก์';
+}
+function closeShareIfOutside(e) {
+  if (e.target === document.getElementById('share-backdrop')) closeShare();
+}
+function copyShareUrl() {
+  const url = getPageUrl();
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('copy-url-btn');
+    btn.textContent = '✓ คัดลอกแล้ว!';
+    setTimeout(() => btn.textContent = 'คัดลอกลิงก์', 2500);
+    toast('✓ คัดลอกลิงก์เรียบร้อย');
+  }).catch(() => {
+    document.getElementById('share-url-input').select();
+    document.execCommand('copy');
+    toast('✓ คัดลอกลิงก์เรียบร้อย');
+  });
+}
+function shareToLine() {
+  const url = encodeURIComponent(getPageUrl());
+  const text = encodeURIComponent(getShareText());
+  window.open(`https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`, '_blank', 'width=600,height=600');
+  closeShare();
+}
+function shareToFacebook() {
+  const url = encodeURIComponent(getPageUrl());
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=500');
+  closeShare();
+}
+function shareToX() {
+  const url = encodeURIComponent(getPageUrl());
+  const text = encodeURIComponent(getShareText());
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=450');
+  closeShare();
+}
+function shareToWhatsApp() {
+  const url = encodeURIComponent(getPageUrl());
+  const text = encodeURIComponent(getShareText() + ' ' + getPageUrl());
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+  closeShare();
+}
+function shareToEmail() {
+  const subject = encodeURIComponent('ThaiText Studio — เพิ่มข้อความไทยบนภาพ Gemini');
+  const body = encodeURIComponent(getShareText() + '\n\n' + getPageUrl());
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  closeShare();
+}
+async function nativeShare() {
+  const data = { title: 'ThaiText Studio', text: getShareText(), url: getPageUrl() };
+  if (navigator.share && navigator.canShare && navigator.canShare(data)) {
+    try { await navigator.share(data); closeShare(); } catch(e) {}
+  } else {
+    copyShareUrl();
+  }
+}
+// Close on Escape key (share modal only — preview handled above)
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShare(); });
 </script>
 </body>
 </html>
